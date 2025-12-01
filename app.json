@@ -9,8 +9,7 @@
         "pages/index/index",
         "pages/stitch/index",
         "pages/watermark/index",
-        "pages/idphoto/index",
-        "pages/pdf/index"
+        "pages/idphoto/index"
       ]
     }
   ],
