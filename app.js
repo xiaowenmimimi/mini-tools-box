@@ -37,6 +37,12 @@ App({
         name: '图像工具箱',
         icon: '🖼️',
         path: '/subpackages/image-tools/pages/index/index'
+      },
+      {
+        id: 'text',
+        name: '文本工具箱',
+        icon: '🔤',
+        path: '/subpackages/text-tools/pages/index/index'
       }
       // 后续可添加更多工具箱
     ]

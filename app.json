@@ -11,6 +11,16 @@
         "pages/watermark/index",
         "pages/idphoto/index"
       ]
+    },
+    {
+      "root": "subpackages/text-tools",
+      "pages": [
+        "pages/index/index",
+        "pages/charcount/index",
+        "pages/qrcode/index",
+        "pages/cron/index",
+        "pages/base/index"
+      ]
     }
   ],
   "window": {

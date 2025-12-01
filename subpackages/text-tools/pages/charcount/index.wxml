@@ -1,0 +1,8 @@
+<view style="padding:20rpx;">
+  <view class="card">
+    <view class="title">字符计数</view>
+    <view class="sub">输入文本统计字数与空白（占位）</view>
+    <button class="btn" bindtap="todo">开始</button>
+    <view class="hint" style="margin-top:10rpx;">* 功能即将上线</view>
+  </view>
+</view>
