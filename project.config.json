@@ -1,0 +1,43 @@
+{
+  "appid": "wx4f311fa7f8fdd934",
+  "projectname": "mini-tools-box",
+  "compileType": "miniprogram",
+  "miniprogramRoot": "./",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "es7": true,
+    "minified": true,
+    "postcss": true,
+    "newFeature": true,
+    "uglifyFileName": false,
+    "enhance": true,
+    "compileWorklet": false,
+    "uploadWithSourceMap": true,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "description": "Tools Box: stitch/idphoto/pdf",
+  "condition": {},
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "editorSetting": {},
+  "libVersion": "3.9.0"
+}

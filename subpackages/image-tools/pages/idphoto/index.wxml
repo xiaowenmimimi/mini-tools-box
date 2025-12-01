@@ -1,0 +1,80 @@
+<view class="page-container">
+  <view class="card">
+    <view class="section-title">选择照片</view>
+    <button class="btn btn-primary" bindtap="pickBase">选择照片（仅1张）</button>
+    <view class="status-row">
+      <view class="hint">推荐白底正面照</view>
+      <view class="status-text">已选：{{baseImage ? 1 : 0}}张</view>
+    </view>
+    <view class="image-preview-single" wx:if="{{baseImage}}">
+      <image class="preview-thumb" src="{{baseImage.path}}" mode="aspectFill"></image>
+    </view>
+  </view>
+
+  <block wx:if="{{baseImage}}">
+    <view class="card">
+      <view class="section-title">规格与裁剪</view>
+      <view class="field-row">
+        <view class="label">规格</view>
+        <radio-group bindchange="onPresetChange">
+          <label class="radio-item"><radio value="1inch" checked="{{preset==='1inch'}}"/>1寸（295×413）</label>
+          <label class="radio-item"><radio value="2inch" checked="{{preset==='2inch'}}"/>2寸（413×579）</label>
+        </radio-group>
+      </view>
+      <view class="field-row">
+        <view class="label">缩放</view>
+        <view class="range">
+          <view class="value-pill">{{scalePercent}}%</view>
+          <slider min="50" max="200" step="1" value="{{scalePercent}}" activeColor="#10B981" backgroundColor="#e5e7eb" block-size="24" show-value="false" bindchanging="onScaleChanging" bindchange="onScaleChange"/>
+        </view>
+      </view>
+      <view class="field-row">
+        <view class="label">位置X</view>
+        <view class="range">
+          <view class="value-pill">{{offsetX}}</view>
+          <slider min="-{{targetSize.w}}" max="{{targetSize.w}}" step="1" value="{{offsetX}}" activeColor="#10B981" backgroundColor="#e5e7eb" block-size="24" show-value="false" bindchanging="onOffsetXChanging" bindchange="onOffsetXChange"/>
+        </view>
+      </view>
+      <view class="field-row">
+        <view class="label">位置Y</view>
+        <view class="range">
+          <view class="value-pill">{{offsetY}}</view>
+          <slider min="-{{targetSize.h}}" max="{{targetSize.h}}" step="1" value="{{offsetY}}" activeColor="#10B981" backgroundColor="#e5e7eb" block-size="24" show-value="false" bindchanging="onOffsetYChanging" bindchange="onOffsetYChange"/>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="section-title">背景与导出</view>
+      <view class="field-row">
+        <view class="label">背景颜色</view>
+        <view class="color-palette">
+          <view class="palette-color-box {{bgColor===item?'active':''}}" wx:for="{{bgPalette}}" wx:key="*this" style="background-color:{{item}}" data-color="{{item}}" bindtap="setBgColor"></view>
+        </view>
+        <view class="custom-color-input">
+          <view class="input-prefix">#</view>
+          <input class="hex-input" value="{{bgHex}}" maxlength="6" bindinput="onBgHexInput"/>
+        </view>
+      </view>
+      <view class="field-row">
+        <view class="label">背景替换</view>
+        <switch checked="{{replaceBg}}" bindchange="toggleReplaceBg"></switch>
+      </view>
+      <view class="field-row" wx:if="{{replaceBg}}">
+        <view class="label">容差</view>
+        <view class="range">
+          <view class="value-pill">{{tolerance}}</view>
+          <slider min="5" max="60" step="1" value="{{tolerance}}" activeColor="#10B981" backgroundColor="#e5e7eb" block-size="24" show-value="false" bindchanging="onToleranceChanging" bindchange="onToleranceChange"/>
+        </view>
+      </view>
+      <view class="toolbar">
+        <button class="btn btn-primary" bindtap="composePreview">生成预览</button>
+        <button class="btn btn-warning" bindtap="exportImage" wx:if="{{composed}}">导出PNG</button>
+      </view>
+    </view>
+
+    <view class="canvas-container" id="canvasBox">
+      <canvas type="2d" id="cvs" style="width:100%; height: {{previewH}}px; background:#f9f9f9; border-radius:12rpx;"></canvas>
+    </view>
+  </block>
+</view>

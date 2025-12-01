@@ -1,0 +1,5 @@
+<view class="tool-card" bindtap="onTap">
+  <view class="tool-icon">{{icon}}</view>
+  <view class="tool-name">{{name}}</view>
+  <view class="tool-desc" wx:if="{{desc}}">{{desc}}</view>
+</view>

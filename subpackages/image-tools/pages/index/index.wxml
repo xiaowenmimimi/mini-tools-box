@@ -1,0 +1,7 @@
+<view class="wrap" style="padding:24rpx;">
+  <view class="title-bar">图像工具箱</view>
+  
+  <tool-grid tools="{{tools}}" columns="{{3}}" bind:toolclick="onToolClick"></tool-grid>
+  
+  <view class="hint" style="margin-top:24rpx;">* 更多工具敬请期待...</view>
+</view>

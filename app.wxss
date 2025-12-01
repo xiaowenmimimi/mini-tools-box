@@ -1,0 +1,8 @@
+page { background: #f7f7f7; color: #222; }
+.card { background:#fff; border-radius:14rpx; padding:24rpx; box-shadow:0 6rpx 18rpx rgba(0,0,0,0.06); }
+.btn { background:#10B981; color:#fff; border-radius:10rpx; padding:16rpx 24rpx; }
+.btn:active { background:#059669; }
+.hint { font-size:24rpx; color:#888; }
+.title { font-weight:600; font-size:32rpx; margin-bottom:12rpx; }
+.sub { font-size:26rpx; color:#666; }
+.toolbar { display:flex; gap:20rpx; }

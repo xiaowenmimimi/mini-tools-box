@@ -1,0 +1,102 @@
+<view class="page-container">
+  <view class="card">
+    <view class="section-title">选择图片</view>
+    <button class="btn btn-primary" bindtap="pickBase">选择图片（仅1张）</button>
+    <view class="status-row" style="margin-top:16rpx;">
+      <view class="hint">支持相册/拍照</view>
+      <view class="status-text">已选：{{baseImage ? 1 : 0}}张</view>
+    </view>
+    <view wx:if="{{baseImage}}" class="image-preview-single">
+      <image class="preview-thumbnail" src="{{baseImage.path}}" mode="aspectFill"></image>
+    </view>
+  </view>
+
+  <block wx:if="{{baseImage}}">
+    <view class="card">
+      <view class="section-title">文字水印</view>
+
+      <view class="field-row">
+        <input class="text-input" placeholder="输入水印文字" value="{{textContent}}" bindinput="onTextInput"/>
+      </view>
+
+      <view class="field-row">
+        <view class="label">模式</view>
+        <radio-group bindchange="onModeChange">
+          <label class="radio-item"><radio value="single" checked="{{mode==='single'}}"/>单个</label>
+          <label class="radio-item"><radio value="tile" checked="{{mode==='tile'}}"/>平铺</label>
+        </radio-group>
+      </view>
+
+      <view class="field-row">
+        <view class="label">方向</view>
+        <radio-group bindchange="onAngleChange">
+          <label class="radio-item"><radio value="horizontal" checked="{{!angleDiagonal}}"/>水平</label>
+          <label class="radio-item"><radio value="diagonal" checked="{{angleDiagonal}}"/>斜向</label>
+        </radio-group>
+      </view>
+
+      <view class="field-row">
+        <view class="label">大小</view>
+        <view class="range">
+          <view class="value-pill">{{sizePercent}}%</view>
+          <slider min="1" max="20" step="1" value="{{sizePercent}}" activeColor="#10B981" backgroundColor="#e5e7eb" block-size="24" show-value="false" bindchanging="onSizePercentChanging" bindchange="onSizePercentChange"/>
+        </view>
+      </view>
+      <view class="field-row">
+        <view class="label">颜色</view>
+        <view class="color-palette">
+          <view class="palette-color-box {{textColor===item?'active':''}}" wx:for="{{colorPalette}}" wx:key="*this" style="background-color:{{item}}" data-color="{{item}}" bindtap="selectTextColor"></view>
+        </view>
+        <view class="custom-color-input">
+          <view class="input-prefix">#</view>
+          <input class="hex-input" value="{{textColor.replace('#','')}}" maxlength="6" bindinput="onTextColorHex"/>
+        </view>
+      </view>
+      <view class="field-row">
+        <view class="label">透明度</view>
+        <view class="range">
+          <view class="value-pill">{{opacityPercent}}%</view>
+          <slider min="10" max="100" step="1" value="{{opacityPercent}}" activeColor="#10B981" backgroundColor="#e5e7eb" block-size="24" show-value="false" bindchanging="onOpacityChanging" bindchange="onOpacityChange"/>
+        </view>
+      </view>
+
+      <view class="field-row" wx:if="{{mode==='tile'}}">
+        <view class="label">密度</view>
+        <view class="range">
+          <view class="value-pill">{{tileDensity}}</view>
+          <slider min="1" max="10" step="1" value="{{tileDensity}}" activeColor="#10B981" backgroundColor="#e5e7eb" block-size="24" show-value="false" bindchanging="onTileDensityChanging" bindchange="onTileDensityChange"/>
+        </view>
+      </view>
+
+      <view class="field-row" wx:if="{{mode==='tile'}}">
+        <view class="label">最小间距</view>
+        <view class="range">
+          <view class="value-pill">{{minSpacingPercent}}%</view>
+          <slider min="0" max="30" step="1" value="{{minSpacingPercent}}" activeColor="#10B981" backgroundColor="#e5e7eb" block-size="24" show-value="false" bindchanging="onMinSpacingChanging" bindchange="onMinSpacingChange"/>
+        </view>
+      </view>
+
+      <view class="field-row" wx:if="{{mode==='single'}}">
+        <view class="label">位置</view>
+        <view class="pos-grid">
+          <radio-group class="pos-grid-inner" bindchange="onPositionChange">
+            <label class="pos-btn"><radio value="top-left" checked="{{position==='top-left'}}"/>左上</label>
+            <label class="pos-btn"><radio value="top-right" checked="{{position==='top-right'}}"/>右上</label>
+            <label class="pos-btn"><radio value="center" checked="{{position==='center'}}"/>居中</label>
+            <label class="pos-btn"><radio value="bottom-left" checked="{{position==='bottom-left'}}"/>左下</label>
+            <label class="pos-btn"><radio value="bottom-right" checked="{{position==='bottom-right'}}"/>右下</label>
+          </radio-group>
+        </view>
+      </view>
+
+      <view class="toolbar">
+        <button class="btn btn-primary" bindtap="composePreview">生成预览</button>
+        <button class="btn btn-warning" bindtap="exportImage" wx:if="{{composed}}">保存图片</button>
+      </view>
+    </view>
+
+    <view class="canvas-container" id="canvasBox">
+      <canvas type="2d" id="cvs" style="width:100%; height: {{previewH}}px; background:#f9f9f9; border-radius:12rpx;"></canvas>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,33 @@
+/* Home styles */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24rpx;
+}
+
+.tool-item {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6rpx 18rpx rgba(0,0,0,0.06);
+  aspect-ratio: 1/1;
+  position: relative;
+}
+
+.tool-item:active {
+  transform: scale(0.97);
+}
+
+.tool-icon {
+  font-size: 72rpx;
+  margin-bottom: 24rpx;
+}
+
+.tool-name {
+  font-size: 32rpx;
+  font-weight: 500;
+}

@@ -1,0 +1,44 @@
+.tools-grid {
+  display: grid;
+  gap: 24rpx;
+}
+
+.tool-item {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6rpx 18rpx rgba(0,0,0,0.06);
+  position: relative;
+}
+
+.tool-item:active {
+  transform: scale(0.97);
+}
+
+.tool-icon {
+  font-size: 60rpx;
+  margin-bottom: 24rpx;
+  height: 120rpx;
+  width: 120rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20rpx;
+  background: #f5f5f5;
+}
+
+.tool-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  margin-bottom: 8rpx;
+}
+
+.tool-desc {
+  font-size: 22rpx;
+  color: #999;
+  text-align: center;
+}

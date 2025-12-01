@@ -1,0 +1,8 @@
+<view style="padding:20rpx;">
+  <view class="card">
+    <view class="title">多图合成 PDF</view>
+    <view class="sub">选择图片 → 设为 A4 → 生成 PDF（后续补齐）</view>
+    <button class="btn" bindtap="todo">选择图片并合成</button>
+    <view class="hint" style="margin-top:10rpx;">* 占位骨架，先跑通主导航与样式</view>
+  </view>
+</view>

@@ -1,0 +1,30 @@
+{
+  "pages": [
+    "pages/home/index"
+  ],
+  "subpackages": [
+    {
+      "root": "subpackages/image-tools",
+      "pages": [
+        "pages/index/index",
+        "pages/stitch/index",
+        "pages/watermark/index",
+        "pages/idphoto/index",
+        "pages/pdf/index"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTitleText": "工具箱",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundTextStyle": "light",
+    "backgroundColor": "#f7f7f7"
+  },
+  "permission": {
+    "scope.writePhotosAlbum": {
+      "desc": "用于保存导出的图片或PDF"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

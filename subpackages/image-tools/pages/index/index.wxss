@@ -1,0 +1,18 @@
+.title-bar {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+  padding-left: 10rpx;
+}
+
+.stitch-icon {
+  background: #d1fae5 !important;
+}
+
+.idphoto-icon {
+  background: #a7f3d0 !important;
+}
+
+.pdf-icon {
+  background: #ecfdf5 !important;
+}
