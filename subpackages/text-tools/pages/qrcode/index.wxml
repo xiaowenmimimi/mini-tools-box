@@ -1,8 +1,135 @@
-<view style="padding:20rpx;">
-  <view class="card">
-    <view class="title">二维码工具</view>
-    <view class="sub">生成与识别（占位）</view>
-    <button class="btn" bindtap="todo">打开</button>
-    <view class="hint" style="margin-top:10rpx;">* 功能即将上线</view>
+<view class="page-container">
+  <!-- Tabs -->
+  <view class="tabs">
+    <view class="tab-item {{activeTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="{{0}}">生成</view>
+    <view class="tab-item {{activeTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="{{1}}">识别</view>
+    <view class="tab-item {{activeTab === 2 ? 'active' : ''}}" bindtap="switchTab" data-index="{{2}}">历史</view>
+  </view>
+
+  <!-- Generate Tab -->
+  <view class="tab-content" wx:if="{{activeTab === 0}}">
+    <view class="card input-card">
+      <textarea class="text-input" placeholder="输入文本或网址..." value="{{inputText}}" bindinput="onInput" maxlength="500"></textarea>
+    </view>
+
+    <view class="card settings-card">
+      <view class="section-header">样式设置</view>
+      
+      <!-- 尺寸选择 -->
+      <view class="setting-item column">
+        <text class="label-block">尺寸</text>
+        <view class="radio-group">
+          <view class="radio-btn {{size === 256 ? 'active' : ''}}" bindtap="onSizeSelect" data-size="{{256}}">小 (256)</view>
+          <view class="radio-btn {{size === 384 ? 'active' : ''}}" bindtap="onSizeSelect" data-size="{{384}}">中 (384)</view>
+          <view class="radio-btn {{size === 512 ? 'active' : ''}}" bindtap="onSizeSelect" data-size="{{512}}">大 (512)</view>
+        </view>
+      </view>
+
+      <!-- 颜色设置 -->
+      <view class="setting-item column">
+        <view class="label-row">
+          <text class="label-block">前景色</text>
+          <view class="color-input-small">
+             <view class="color-preview-dot" style="background: {{colorDark}};"></view>
+             <input class="color-input-text" value="{{colorDark}}" bindinput="onColorDarkChange" placeholder="#000000"/>
+          </view>
+        </view>
+        <scroll-view scroll-x enable-flex class="color-scroll">
+          <view class="color-list">
+            <view wx:for="{{colorPresets}}" wx:key="*this" 
+                  class="color-opt {{colorDark === item ? 'active' : ''}}" 
+                  bindtap="onColorDarkPreset" 
+                  data-color="{{item}}" 
+                  style="background:{{item}}; border:{{item==='#ffffff'?'1rpx solid #ddd':'none'}};"></view>
+          </view>
+        </scroll-view>
+      </view>
+
+      <view class="setting-item column">
+        <view class="label-row">
+          <text class="label-block">背景色</text>
+          <view class="color-input-small">
+             <view class="color-preview-dot" style="background: {{colorLight}};"></view>
+             <input class="color-input-text" value="{{colorLight}}" bindinput="onColorLightChange" placeholder="#ffffff"/>
+          </view>
+        </view>
+        <scroll-view scroll-x enable-flex class="color-scroll">
+          <view class="color-list">
+            <view wx:for="{{colorPresets}}" wx:key="*this" 
+                  class="color-opt {{colorLight === item ? 'active' : ''}}" 
+                  bindtap="onColorLightPreset" 
+                  data-color="{{item}}" 
+                  style="background:{{item}}; border:{{item==='#ffffff'?'1rpx solid #ddd':'none'}};"></view>
+          </view>
+        </scroll-view>
+      </view>
+
+      <view class="setting-item">
+        <text class="label">Logo (可选)</text>
+        <view class="logo-uploader" bindtap="chooseLogo">
+          <image wx:if="{{logoPath}}" src="{{logoPath}}" mode="aspectFit" class="logo-preview"></image>
+          <view wx:else class="upload-placeholder">+</view>
+        </view>
+        <view wx:if="{{logoPath}}" class="clear-btn" catchtap="clearLogo">清除</view>
+      </view>
+    </view>
+
+    <view class="card preview-card">
+      <image wx:if="{{previewImg}}" src="{{previewImg}}" mode="aspectFit" class="preview-image" bindtap="previewBigImage"></image>
+      <view wx:else class="preview-loading">
+        <text>生成中...</text>
+      </view>
+    </view>
+
+    <!-- Hidden Canvas for Generation -->
+    <view style="position: fixed; left: -9999px; top: -9999px;">
+      <canvas canvas-id="qrcodeCanvas" style="width: {{size}}px; height: {{size}}px;"></canvas>
+    </view>
+
+    <view class="action-bar">
+      <button class="btn btn-primary" bindtap="generateQR">生成预览</button>
+      <button class="btn btn-outline" bindtap="saveImage">保存图片</button>
+    </view>
+  </view>
+
+  <!-- Recognize Tab -->
+  <view class="tab-content" wx:if="{{activeTab === 1}}">
+    <view class="scan-actions">
+      <view class="scan-btn-large" bindtap="scanCode">
+        <view class="icon-scan">📷</view>
+        <text>扫码识别</text>
+      </view>
+      <view class="scan-btn-large" bindtap="chooseImageScan">
+        <view class="icon-image">🖼️</view>
+        <text>相册识别</text>
+      </view>
+    </view>
+
+    <view class="card result-card" wx:if="{{scanResult}}">
+      <view class="result-header">识别结果</view>
+      <text class="result-text" user-select>{{scanResult}}</text>
+      <view class="result-actions">
+        <button class="btn btn-sm" bindtap="copyResult">复制</button>
+        <button class="btn btn-sm btn-warning" wx:if="{{isUrl}}" bindtap="openLink">打开链接</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- History Tab -->
+  <view class="tab-content" wx:if="{{activeTab === 2}}">
+    <view class="history-list">
+      <block wx:if="{{historyList.length > 0}}">
+        <view class="history-item" wx:for="{{historyList}}" wx:key="timestamp">
+          <view class="history-info" bindtap="viewHistoryItem" data-item="{{item}}">
+            <view class="history-type {{item.type === 'gen' ? 'type-gen' : 'type-scan'}}">{{item.type === 'gen' ? '生成' : '识别'}}</view>
+            <view class="history-content">{{item.content}}</view>
+            <view class="history-date">{{item.date}}</view>
+          </view>
+          <view class="history-delete" bindtap="deleteHistoryItem" data-index="{{index}}">×</view>
+        </view>
+      </block>
+      <view wx:else class="empty-state">暂无历史记录</view>
+    </view>
+    <view wx:if="{{historyList.length > 0}}" class="clear-history-btn" bindtap="clearHistory">清空历史</view>
   </view>
 </view>

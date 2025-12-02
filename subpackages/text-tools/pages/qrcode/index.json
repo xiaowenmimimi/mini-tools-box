@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "二维码"
+  "navigationBarTitleText": "二维码工具",
+  "usingComponents": {
+    "tool-card": "/components/tool-card/index"
+  }
 }
