@@ -102,6 +102,10 @@
   width: 100%;
 }
 
+.radio-group.wrap {
+  flex-wrap: wrap;
+}
+
 .radio-btn {
   flex: 1;
   text-align: center;
@@ -112,6 +116,73 @@
   border-radius: 12rpx;
   border: 1px solid transparent;
   transition: all 0.2s;
+  min-width: 120rpx; /* 防止太窄 */
+}
+
+/* Custom Input */
+.custom-input-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  width: 100%;
+  margin-top: 16rpx;
+}
+
+.input-bordered {
+  border: 1px solid #ddd;
+  border-radius: 8rpx;
+  padding: 12rpx 24rpx;
+  font-size: 28rpx;
+  background: #fff;
+}
+
+.custom-input-row .input-bordered {
+  flex: 1;
+}
+
+/* Text Config */
+.text-config-area {
+  width: 100%;
+  margin-top: 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  background: #f9fafb;
+  padding: 16rpx;
+  border-radius: 12rpx;
+}
+
+.full-width {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.text-style-row {
+  display: flex;
+  gap: 24rpx;
+}
+
+.size-input-small {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 6rpx 16rpx;
+  border: 1px solid #eee;
+}
+
+.size-input-small .input-bordered.small {
+  width: 80rpx;
+  border: none;
+  background: transparent;
+  padding: 0 8rpx;
+  text-align: center;
+}
+
+.label-small {
+  font-size: 24rpx;
+  color: #666;
+  margin-right: 8rpx;
 }
 
 .radio-btn.active {

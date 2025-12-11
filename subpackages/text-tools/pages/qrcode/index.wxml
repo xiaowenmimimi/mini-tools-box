@@ -17,11 +17,50 @@
       
       <!-- 尺寸选择 -->
       <view class="setting-item column">
-        <text class="label-block">尺寸</text>
+        <text class="label-block">尺寸 (px)</text>
+        <view class="radio-group wrap">
+          <view class="radio-btn {{sizeType === 'fixed' && size === 300 ? 'active' : ''}}" bindtap="onSizeSelect" data-size="{{300}}" data-type="fixed">300</view>
+          <view class="radio-btn {{sizeType === 'fixed' && size === 400 ? 'active' : ''}}" bindtap="onSizeSelect" data-size="{{400}}" data-type="fixed">400</view>
+          <view class="radio-btn {{sizeType === 'fixed' && size === 500 ? 'active' : ''}}" bindtap="onSizeSelect" data-size="{{500}}" data-type="fixed">500</view>
+          <view class="radio-btn {{sizeType === 'custom' ? 'active' : ''}}" bindtap="onSizeSelect" data-size="{{customSize}}" data-type="custom">自定义</view>
+        </view>
+        <view wx:if="{{sizeType === 'custom'}}" class="custom-input-row">
+          <input class="input-bordered" type="number" value="{{customSize}}" bindinput="onCustomSizeInput" placeholder="输入尺寸(100-1000)" />
+          <text>px</text>
+        </view>
+      </view>
+
+      <!-- 码边距 -->
+      <view class="setting-item column">
+        <text class="label-block">码边距 (Quiet Zone)</text>
         <view class="radio-group">
-          <view class="radio-btn {{size === 256 ? 'active' : ''}}" bindtap="onSizeSelect" data-size="{{256}}">小 (256)</view>
-          <view class="radio-btn {{size === 384 ? 'active' : ''}}" bindtap="onSizeSelect" data-size="{{384}}">中 (384)</view>
-          <view class="radio-btn {{size === 512 ? 'active' : ''}}" bindtap="onSizeSelect" data-size="{{512}}">大 (512)</view>
+          <view class="radio-btn {{marginType === 1 ? 'active' : ''}}" bindtap="onMarginSelect" data-margin="{{1}}">1个色块</view>
+          <view class="radio-btn {{marginType === 2 ? 'active' : ''}}" bindtap="onMarginSelect" data-margin="{{2}}">2个色块</view>
+          <view class="radio-btn {{marginType === 3 ? 'active' : ''}}" bindtap="onMarginSelect" data-margin="{{3}}">3个色块</view>
+        </view>
+      </view>
+
+      <!-- 添加文字 -->
+      <view class="setting-item column">
+        <text class="label-block">添加文字</text>
+        <view class="radio-group">
+          <view class="radio-btn {{textLocation === 'none' ? 'active' : ''}}" bindtap="onTextLocationSelect" data-loc="none">无</view>
+          <view class="radio-btn {{textLocation === 'top' ? 'active' : ''}}" bindtap="onTextLocationSelect" data-loc="top">码上</view>
+          <view class="radio-btn {{textLocation === 'bottom' ? 'active' : ''}}" bindtap="onTextLocationSelect" data-loc="bottom">码下</view>
+        </view>
+        <view wx:if="{{textLocation !== 'none'}}" class="text-config-area">
+          <input class="input-bordered full-width" value="{{textContent}}" bindinput="onTextContentInput" placeholder="请输入显示的文字" />
+          <view class="text-style-row">
+            <view class="color-input-small">
+               <text class="label-small">颜色</text>
+               <view class="color-preview-dot" style="background: {{textColor}};"></view>
+               <input class="color-input-text" value="{{textColor}}" bindinput="onTextColorInput" placeholder="#000000"/>
+            </view>
+            <view class="size-input-small">
+               <text class="label-small">大小</text>
+               <input class="input-bordered small" type="number" value="{{textSize}}" bindinput="onTextSizeInput" />
+            </view>
+          </view>
         </view>
       </view>
 
@@ -83,7 +122,7 @@
 
     <!-- Hidden Canvas for Generation -->
     <view style="position: fixed; left: -9999px; top: -9999px;">
-      <canvas canvas-id="qrcodeCanvas" style="width: {{size}}px; height: {{size}}px;"></canvas>
+      <canvas canvas-id="qrcodeCanvas" style="width: {{canvasWidth || size}}px; height: {{canvasHeight || size}}px;"></canvas>
     </view>
 
     <view class="action-bar">
