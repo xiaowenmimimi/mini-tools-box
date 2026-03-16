@@ -1,1 +1,90 @@
-/* subpackages/text-tools/pages/cron/index.wxss */
+<view class="page-container">
+  <!-- Tabs -->
+  <view class="tabs">
+    <view class="tab-item {{activeTab === 'generate' ? 'active' : ''}}" bindtap="switchTab" data-tab="generate">生成 Cron</view>
+    <view class="tab-item {{activeTab === 'parse' ? 'active' : ''}}" bindtap="switchTab" data-tab="parse">解析 Cron</view>
+  </view>
+
+  <!-- Generate Mode -->
+  <view class="tab-content" wx:if="{{activeTab === 'generate'}}">
+    <view class="card">
+      <view class="preset-row">
+        <view class="preset-btn" bindtap="togglePresets">⚡ 快速选择常用模板</view>
+      </view>
+      
+      <view class="field-grid">
+        <view class="field-item">
+          <text class="label">秒</text>
+          <input class="input" value="{{second}}" bindinput="onFieldChange" data-field="second" placeholder="*" />
+        </view>
+        <view class="field-item">
+          <text class="label">分</text>
+          <input class="input" value="{{minute}}" bindinput="onFieldChange" data-field="minute" placeholder="*" />
+        </view>
+        <view class="field-item">
+          <text class="label">时</text>
+          <input class="input" value="{{hour}}" bindinput="onFieldChange" data-field="hour" placeholder="*" />
+        </view>
+        <view class="field-item">
+          <text class="label">日</text>
+          <input class="input" value="{{dayOfMonth}}" bindinput="onFieldChange" data-field="dayOfMonth" placeholder="*" />
+        </view>
+        <view class="field-item">
+          <text class="label">月</text>
+          <input class="input" value="{{month}}" bindinput="onFieldChange" data-field="month" placeholder="*" />
+        </view>
+        <view class="field-item">
+          <text class="label">周</text>
+          <input class="input" value="{{dayOfWeek}}" bindinput="onFieldChange" data-field="dayOfWeek" placeholder="*" />
+        </view>
+      </view>
+      
+      <view class="help-text">
+        <text>允许值：* (所有), , (枚举), - (范围), / (步长)</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Parse Mode -->
+  <view class="tab-content" wx:if="{{activeTab === 'parse'}}">
+    <view class="card">
+      <view class="section-title">Cron 表达式</view>
+      <textarea class="cron-input" value="{{cronExpression}}" bindinput="onCronInput" placeholder="输入 Cron 表达式，例如: 0 0 12 * * ?" maxlength="100" auto-height></textarea>
+    </view>
+  </view>
+
+  <!-- Result Preview (Common) -->
+  <view class="card result-card">
+    <view class="result-header">
+      <text class="result-title">结果预览</text>
+      <view class="copy-btn" bindtap="copyCron">复制表达式</view>
+    </view>
+    
+    <view class="cron-display">{{cronExpression}}</view>
+    
+    <view class="run-list" wx:if="{{nextRuns.length > 0}}">
+      <view class="list-title">最近 5 次运行时间：</view>
+      <view class="run-item" wx:for="{{nextRuns}}" wx:key="*this">
+        <text class="run-index">{{index + 1}}.</text>
+        <text class="run-time">{{item}}</text>
+      </view>
+    </view>
+    
+    <view class="error-box" wx:if="{{errorMsg}}">
+      <text>{{errorMsg}}</text>
+    </view>
+  </view>
+
+  <!-- Presets Modal -->
+  <view class="modal-mask" wx:if="{{showPresetModal}}" bindtap="togglePresets">
+    <view class="modal-content" catchtap="true">
+      <view class="modal-header">常用模板</view>
+      <scroll-view scroll-y class="preset-list">
+        <view class="preset-item" wx:for="{{presets}}" wx:key="value" bindtap="selectPreset" data-value="{{item.value}}">
+          <text class="preset-label">{{item.label}}</text>
+          <text class="preset-value">{{item.value}}</text>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>
