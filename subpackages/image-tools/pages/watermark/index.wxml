@@ -1,22 +1,30 @@
-<view class="page-container">
-  <view class="card">
-    <view class="section-title">选择图片</view>
-    <button class="btn btn-primary" bindtap="pickBase">选择图片（仅1张）</button>
-    <view class="status-row" style="margin-top:16rpx;">
+<view class="page-shell">
+  <view class="page-header ui-hero-glass">
+    <view class="page-title">图片水印</view>
+    <view class="page-subtitle">支持单个与平铺模式，参数实时可调</view>
+  </view>
+  <view class="card ui-soft-card">
+    <view class="ui-section-title">选择图片</view>
+    <button class="btn ui-btn-primary" bindtap="pickBase">选择图片（仅1张）</button>
+    <view class="status-row status-gap">
       <view class="hint">支持相册/拍照</view>
       <view class="status-text">已选：{{baseImage ? 1 : 0}}张</view>
     </view>
     <view wx:if="{{baseImage}}" class="image-preview-single">
       <image class="preview-thumbnail" src="{{baseImage.path}}" mode="aspectFill"></image>
     </view>
+    <view wx:else class="ui-empty">
+      <view class="ui-empty-title">还没有图片</view>
+      <view class="ui-empty-sub">先选择一张图片，再配置水印参数</view>
+    </view>
   </view>
 
   <block wx:if="{{baseImage}}">
-    <view class="card">
-      <view class="section-title">文字水印</view>
+    <view class="card ui-soft-card">
+      <view class="ui-section-title">文字水印</view>
 
       <view class="field-row">
-        <input class="text-input" placeholder="输入水印文字" value="{{textContent}}" bindinput="onTextInput"/>
+        <input class="text-input ui-input-surface" placeholder="输入水印文字" value="{{textContent}}" bindinput="onTextInput"/>
       </view>
 
       <view class="field-row">
@@ -90,8 +98,8 @@
       </view>
 
       <view class="toolbar">
-        <button class="btn btn-primary" bindtap="composePreview">生成预览</button>
-        <button class="btn btn-warning" bindtap="exportImage" wx:if="{{composed}}">保存图片</button>
+        <button class="btn ui-btn-primary" bindtap="composePreview">生成预览</button>
+        <button class="btn ui-btn-warning" bindtap="exportImage" wx:if="{{composed}}">保存图片</button>
       </view>
     </view>
 

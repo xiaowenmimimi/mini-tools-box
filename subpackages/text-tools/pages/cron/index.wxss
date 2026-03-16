@@ -1,90 +1,229 @@
-<view class="page-container">
-  <!-- Tabs -->
-  <view class="tabs">
-    <view class="tab-item {{activeTab === 'generate' ? 'active' : ''}}" bindtap="switchTab" data-tab="generate">生成 Cron</view>
-    <view class="tab-item {{activeTab === 'parse' ? 'active' : ''}}" bindtap="switchTab" data-tab="parse">解析 Cron</view>
-  </view>
+.tabs {
+  display: flex;
+  background: #ffffff;
+  border-radius: 18rpx;
+  padding: 8rpx;
+  box-shadow: 0 10rpx 24rpx rgba(15, 23, 42, 0.08);
+}
 
-  <!-- Generate Mode -->
-  <view class="tab-content" wx:if="{{activeTab === 'generate'}}">
-    <view class="card">
-      <view class="preset-row">
-        <view class="preset-btn" bindtap="togglePresets">⚡ 快速选择常用模板</view>
-      </view>
-      
-      <view class="field-grid">
-        <view class="field-item">
-          <text class="label">秒</text>
-          <input class="input" value="{{second}}" bindinput="onFieldChange" data-field="second" placeholder="*" />
-        </view>
-        <view class="field-item">
-          <text class="label">分</text>
-          <input class="input" value="{{minute}}" bindinput="onFieldChange" data-field="minute" placeholder="*" />
-        </view>
-        <view class="field-item">
-          <text class="label">时</text>
-          <input class="input" value="{{hour}}" bindinput="onFieldChange" data-field="hour" placeholder="*" />
-        </view>
-        <view class="field-item">
-          <text class="label">日</text>
-          <input class="input" value="{{dayOfMonth}}" bindinput="onFieldChange" data-field="dayOfMonth" placeholder="*" />
-        </view>
-        <view class="field-item">
-          <text class="label">月</text>
-          <input class="input" value="{{month}}" bindinput="onFieldChange" data-field="month" placeholder="*" />
-        </view>
-        <view class="field-item">
-          <text class="label">周</text>
-          <input class="input" value="{{dayOfWeek}}" bindinput="onFieldChange" data-field="dayOfWeek" placeholder="*" />
-        </view>
-      </view>
-      
-      <view class="help-text">
-        <text>允许值：* (所有), , (枚举), - (范围), / (步长)</text>
-      </view>
-    </view>
-  </view>
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  font-size: 28rpx;
+  color: #64748b;
+  border-radius: 12rpx;
+  font-weight: 500;
+}
 
-  <!-- Parse Mode -->
-  <view class="tab-content" wx:if="{{activeTab === 'parse'}}">
-    <view class="card">
-      <view class="section-title">Cron 表达式</view>
-      <textarea class="cron-input" value="{{cronExpression}}" bindinput="onCronInput" placeholder="输入 Cron 表达式，例如: 0 0 12 * * ?" maxlength="100" auto-height></textarea>
-    </view>
-  </view>
+.tab-item.active {
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  color: #ffffff;
+  font-weight: 700;
+}
 
-  <!-- Result Preview (Common) -->
-  <view class="card result-card">
-    <view class="result-header">
-      <text class="result-title">结果预览</text>
-      <view class="copy-btn" bindtap="copyCron">复制表达式</view>
-    </view>
-    
-    <view class="cron-display">{{cronExpression}}</view>
-    
-    <view class="run-list" wx:if="{{nextRuns.length > 0}}">
-      <view class="list-title">最近 5 次运行时间：</view>
-      <view class="run-item" wx:for="{{nextRuns}}" wx:key="*this">
-        <text class="run-index">{{index + 1}}.</text>
-        <text class="run-time">{{item}}</text>
-      </view>
-    </view>
-    
-    <view class="error-box" wx:if="{{errorMsg}}">
-      <text>{{errorMsg}}</text>
-    </view>
-  </view>
+.preset-row {
+  margin-bottom: 24rpx;
+  display: flex;
+  justify-content: flex-end;
+}
 
-  <!-- Presets Modal -->
-  <view class="modal-mask" wx:if="{{showPresetModal}}" bindtap="togglePresets">
-    <view class="modal-content" catchtap="true">
-      <view class="modal-header">常用模板</view>
-      <scroll-view scroll-y class="preset-list">
-        <view class="preset-item" wx:for="{{presets}}" wx:key="value" bindtap="selectPreset" data-value="{{item.value}}">
-          <text class="preset-label">{{item.label}}</text>
-          <text class="preset-value">{{item.value}}</text>
-        </view>
-      </scroll-view>
-    </view>
-  </view>
-</view>
+.preset-btn {
+  font-size: 26rpx;
+  color: #0f766e;
+  background: linear-gradient(135deg, #ccfbf1 0%, #99f6e4 100%);
+  padding: 12rpx 24rpx;
+  border-radius: 30rpx;
+  font-weight: 600;
+}
+
+.preset-btn:active {
+  opacity: 0.8;
+}
+
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.45);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+}
+
+.modal-content {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 24rpx 24rpx 0 0;
+  padding: 32rpx;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  font-size: 32rpx;
+  font-weight: 700;
+  margin-bottom: 24rpx;
+  text-align: center;
+  color: #0f172a;
+}
+
+.preset-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.preset-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid rgba(148, 163, 184, 0.28);
+}
+
+.preset-item:last-child {
+  border-bottom: none;
+}
+
+.preset-label {
+  font-size: 28rpx;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.preset-value {
+  font-size: 26rpx;
+  color: #64748b;
+  font-family: monospace;
+}
+
+.cron-desc {
+  text-align: center;
+  font-size: 26rpx;
+  color: #10B981;
+  margin-bottom: 24rpx;
+  background: #ecfdf5;
+  padding: 12rpx;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24rpx;
+}
+
+.field-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.label {
+  font-size: 24rpx;
+  color: #475569;
+  font-weight: 600;
+}
+
+.input {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1rpx solid rgba(148, 163, 184, 0.32);
+  border-radius: 12rpx;
+  padding: 12rpx;
+  font-size: 28rpx;
+  text-align: center;
+  font-family: monospace;
+  color: #0f172a;
+}
+
+.help-text {
+  margin-top: 24rpx;
+  font-size: 22rpx;
+  color: #64748b;
+  text-align: center;
+}
+
+.ui-section-title {
+  margin-bottom: 16rpx;
+}
+
+.cron-input {
+  width: 100%;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 14rpx;
+  padding: 20rpx;
+  font-size: 32rpx;
+  font-family: monospace;
+  box-sizing: border-box;
+  color: #0f172a;
+  min-height: 100rpx;
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.result-title {
+  font-size: 30rpx;
+}
+
+.copy-btn {
+  font-size: 24rpx;
+  color: #0f766e;
+  background: #ccfbf1;
+  padding: 8rpx 16rpx;
+  border-radius: 10rpx;
+  font-weight: 600;
+}
+
+.cron-display {
+  background: #0f172a;
+  color: #5eead4;
+  padding: 24rpx;
+  border-radius: 14rpx;
+  font-family: monospace;
+  font-size: 32rpx;
+  text-align: center;
+  margin-bottom: 24rpx;
+  word-break: break-all;
+}
+
+.run-list {
+  background: #f8fafc;
+  border-radius: 14rpx;
+  padding: 24rpx;
+}
+
+.list-title {
+  font-size: 26rpx;
+  color: #475569;
+  margin-bottom: 16rpx;
+  font-weight: 600;
+}
+
+.run-item {
+  display: flex;
+  gap: 16rpx;
+  font-size: 28rpx;
+  color: #1f2937;
+  margin-bottom: 8rpx;
+  font-family: monospace;
+}
+
+.run-index {
+  color: #94a3b8;
+  width: 40rpx;
+}
+
+.error-box {
+  margin-top: 24rpx;
+  padding: 20rpx;
+  background: #fff1f2;
+  border-radius: 14rpx;
+  color: #e11d48;
+  font-size: 26rpx;
+}

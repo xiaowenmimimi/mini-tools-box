@@ -1,13 +1,17 @@
-<view class="page-container">
-  <view class="card step-container">
+<view class="page-shell">
+  <view class="page-header ui-hero-glass">
+    <view class="page-title">图片拼接</view>
+    <view class="page-subtitle">多图拖拽排序，一键生成长图</view>
+  </view>
+  <view class="card ui-soft-card step-container">
     <view class="step-badge">1</view>
-    <view class="section-title">选择图片</view>
-    <button class="btn btn-primary" bindtap="pick">
+    <view class="ui-section-title pick-title">选择图片</view>
+    <button class="btn ui-btn-primary" bindtap="pick">
       <text class="iconfont">📷</text> 选择图片（最多15张）
     </button>
-    <view class="status-row" style="margin-top:16rpx;">
+    <view class="status-row status-gap">
       <view class="hint">支持多选导入，长按可拖动图片修改顺序</view>
-      <view class="status-text">已选：{{list.length}}张</view>
+      <view class="ui-pill ui-pill-success">已选 {{list.length}} 张</view>
     </view>
     
     <!-- 图片预览区 (网格布局) -->
@@ -29,6 +33,10 @@
         </view>
       </view>
     </view>
+    <view wx:else class="ui-empty">
+      <view class="ui-empty-title">还没有图片</view>
+      <view class="ui-empty-sub">先选择图片，再进行拖拽排序与拼接</view>
+    </view>
   </view>
 
   <!-- 被拖拽的项的浮动克隆 -->
@@ -45,9 +53,9 @@
   </view>
 
   <block wx:if="{{list.length}}">
-    <view class="card step-container">
+    <view class="card ui-soft-card step-container">
       <view class="step-badge">2</view>
-      <view class="section-title">预览与拼接</view>
+      <view class="ui-section-title">参数与拼接</view>
       
       <view class="bg-select-section">
         <text class="section-subtitle">背景颜色</text>
@@ -110,15 +118,16 @@
       </view>
       
       <view class="toolbar">
-        <button class="btn btn-primary" bindtap="compose">开始拼接</button>
+        <button class="btn ui-btn-primary" bindtap="compose">开始拼接</button>
 
-        <button class="btn btn-warning" bindtap="exportImg" wx:if="{{composed}}">导出图片</button>
+        <button class="btn ui-btn-warning" bindtap="exportImg" wx:if="{{composed}}">导出图片</button>
       </view>
     </view>
 
 
-
-    <view class="canvas-container" id="canvasBox">
+    <view class="card ui-soft-card result-stage">
+      <view class="ui-section-title">拼接结果</view>
+      <view class="canvas-container" id="canvasBox">
       <!-- 隐藏的Canvas用于绘制 -->
       <canvas
         type="2d"
@@ -149,6 +158,11 @@
         <view class="error-icon">⚠</view>
         <text>预览图片加载失败</text>
         <text class="error-hint">请直接导出图片查看效果</text>
+      </view>
+      <view class="ui-empty" wx:if="{{!previewImageUrl && !previewError && !previewLoading}}">
+        <view class="ui-empty-title">等待生成结果</view>
+        <view class="ui-empty-sub">点击“开始拼接”后在这里查看长图</view>
+      </view>
       </view>
     </view>
 

@@ -1,5 +1,11 @@
-<view class="wrap" style="padding:24rpx;">
-  <view class="title-bar">文本工具箱</view>
-  <tool-grid tools="{{tools}}" columns="{{3}}" bind:toolclick="onToolClick"></tool-grid>
-  <view class="hint" style="margin-top:24rpx;">* 功能持续更新</view>
+<view class="page-shell">
+  <view class="page-header ui-hero-glass">
+    <view class="page-title">文本工具箱</view>
+    <view class="page-subtitle">字符统计、二维码、Cron、进制转换</view>
+  </view>
+  <view class="card ui-soft-card">
+    <view class="ui-section-title entry-title">功能入口</view>
+    <tool-grid tools="{{tools}}" columns="{{3}}" bind:toolclick="onToolClick"></tool-grid>
+  </view>
+  <view class="hint">* 功能持续更新</view>
 </view>

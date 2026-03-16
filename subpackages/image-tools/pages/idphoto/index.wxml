@@ -1,7 +1,11 @@
-<view class="page-container">
-  <view class="card">
-    <view class="section-title">选择照片</view>
-    <button class="btn btn-primary" bindtap="pickBase">选择照片（仅1张）</button>
+<view class="page-shell">
+  <view class="page-header ui-hero-glass">
+    <view class="page-title">证件照处理</view>
+    <view class="page-subtitle">规格裁剪、背景替换与导出</view>
+  </view>
+  <view class="card ui-soft-card">
+    <view class="ui-section-title">选择照片</view>
+    <button class="btn ui-btn-primary" bindtap="pickBase">选择照片（仅1张）</button>
     <view class="status-row">
       <view class="hint">推荐白底正面照</view>
       <view class="status-text">已选：{{baseImage ? 1 : 0}}张</view>
@@ -9,11 +13,15 @@
     <view class="image-preview-single" wx:if="{{baseImage}}">
       <image class="preview-thumb" src="{{baseImage.path}}" mode="aspectFill"></image>
     </view>
+    <view class="ui-empty" wx:else>
+      <view class="ui-empty-title">还没有照片</view>
+      <view class="ui-empty-sub">先选择一张正面照片，再进行规格与背景处理</view>
+    </view>
   </view>
 
   <block wx:if="{{baseImage}}">
-    <view class="card">
-      <view class="section-title">规格与裁剪</view>
+    <view class="card ui-soft-card">
+      <view class="ui-section-title">规格与裁剪</view>
       <view class="field-row">
         <view class="label">规格</view>
         <radio-group bindchange="onPresetChange">
@@ -44,8 +52,8 @@
       </view>
     </view>
 
-    <view class="card">
-      <view class="section-title">背景与导出</view>
+    <view class="card ui-soft-card">
+      <view class="ui-section-title">背景与导出</view>
       <view class="field-row">
         <view class="label">背景颜色</view>
         <view class="color-palette">
@@ -68,8 +76,8 @@
         </view>
       </view>
       <view class="toolbar">
-        <button class="btn btn-primary" bindtap="composePreview">生成预览</button>
-        <button class="btn btn-warning" bindtap="exportImage" wx:if="{{composed}}">导出PNG</button>
+        <button class="btn ui-btn-primary" bindtap="composePreview">生成预览</button>
+        <button class="btn ui-btn-warning" bindtap="exportImage" wx:if="{{composed}}">导出PNG</button>
       </view>
     </view>
 

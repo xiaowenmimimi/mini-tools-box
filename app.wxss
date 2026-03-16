@@ -1,8 +1,194 @@
-page { background: #f7f7f7; color: #222; }
-.card { background:#fff; border-radius:14rpx; padding:24rpx; box-shadow:0 6rpx 18rpx rgba(0,0,0,0.06); }
-.btn { background:#10B981; color:#fff; border-radius:10rpx; padding:16rpx 24rpx; }
-.btn:active { background:#059669; }
-.hint { font-size:24rpx; color:#888; }
-.title { font-weight:600; font-size:32rpx; margin-bottom:12rpx; }
-.sub { font-size:26rpx; color:#666; }
-.toolbar { display:flex; gap:20rpx; }
+page {
+  background: linear-gradient(180deg, #eefcf8 0%, #f4f8ff 38%, #f8fafc 100%);
+  color: #1f2937;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(15, 23, 42, 0.06);
+}
+
+.btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border-radius: 12rpx;
+  padding: 16rpx 24rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.btn:active {
+  transform: scale(0.98);
+  opacity: 0.95;
+}
+
+.hint {
+  font-size: 24rpx;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 36rpx;
+  color: #0f172a;
+}
+
+.sub {
+  font-size: 24rpx;
+  color: #64748b;
+}
+
+.toolbar {
+  display: flex;
+  gap: 20rpx;
+}
+
+.page-shell {
+  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.page-header {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(52, 211, 153, 0.08) 100%);
+  border-radius: 20rpx;
+  padding: 26rpx 24rpx;
+}
+
+.page-title {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.page-subtitle {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #64748b;
+}
+
+.ui-btn-primary {
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  color: #ffffff;
+}
+
+.ui-btn-warning {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+}
+
+.ui-btn-outline {
+  background: #ffffff;
+  color: #0f766e;
+  border: 1rpx solid rgba(20, 184, 166, 0.7);
+}
+
+.ui-input-surface {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1rpx solid rgba(148, 163, 184, 0.26);
+  border-radius: 12rpx;
+  color: #0f172a;
+}
+
+.ui-muted-card {
+  background: #f8fafc;
+  border: 1rpx solid rgba(148, 163, 184, 0.22);
+  border-radius: 14rpx;
+}
+
+.ui-title-leftbar {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #0f172a;
+  border-left: 6rpx solid #0ea5a4;
+  padding-left: 16rpx;
+}
+
+.ui-hero-glass {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.2) 0%, rgba(96, 165, 250, 0.14) 56%, rgba(249, 250, 251, 0.95) 100%);
+  border: 1rpx solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 18rpx 36rpx rgba(15, 23, 42, 0.1);
+}
+
+.ui-hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  padding: 8rpx 18rpx;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  color: #0f766e;
+  background: rgba(204, 251, 241, 0.9);
+  border: 1rpx solid rgba(20, 184, 166, 0.35);
+}
+
+.ui-soft-card {
+  background: linear-gradient(160deg, #ffffff 0%, #f8fafc 100%);
+  border: 1rpx solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 12rpx 28rpx rgba(15, 23, 42, 0.08);
+  border-radius: 20rpx;
+}
+
+.ui-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999rpx;
+  padding: 8rpx 16rpx;
+  font-size: 22rpx;
+  font-weight: 600;
+}
+
+.ui-pill-success {
+  background: #ccfbf1;
+  color: #0f766e;
+}
+
+.ui-pill-info {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.ui-empty {
+  border-radius: 16rpx;
+  padding: 32rpx 24rpx;
+  background: #f8fafc;
+  border: 1rpx dashed rgba(148, 163, 184, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  color: #64748b;
+}
+
+.ui-empty-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #334155;
+}
+
+.ui-empty-sub {
+  font-size: 24rpx;
+  color: #94a3b8;
+}
+
+.ui-section-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.ui-section-title::before {
+  content: '';
+  width: 10rpx;
+  height: 30rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(180deg, #14b8a6 0%, #0d9488 100%);
+}

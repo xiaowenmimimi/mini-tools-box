@@ -1,18 +1,15 @@
-.title-bar {
-  font-size: 36rpx;
-  font-weight: bold;
-  margin-bottom: 30rpx;
-  padding-left: 10rpx;
+.stitch-icon {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
 }
 
-.stitch-icon {
-  background: #d1fae5 !important;
+.wm-icon {
+  background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%) !important;
 }
 
 .idphoto-icon {
-  background: #a7f3d0 !important;
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%) !important;
 }
 
-.pdf-icon {
-  background: #ecfdf5 !important;
+.entry-title {
+  margin-bottom: 20rpx;
 }

@@ -1,18 +1,19 @@
-.title-bar {
-  font-size: 36rpx;
-  font-weight: bold;
-  margin-bottom: 30rpx;
-  padding-left: 10rpx;
+.char-icon {
+  background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%) !important;
 }
 
-.stitch-icon {
-  background: #d1fae5 !important;
+.qr-icon {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
 }
 
-.idphoto-icon {
-  background: #a7f3d0 !important;
+.cron-icon {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%) !important;
 }
 
-.pdf-icon {
-  background: #ecfdf5 !important;
+.base-icon {
+  background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%) !important;
+}
+
+.entry-title {
+  margin-bottom: 20rpx;
 }

@@ -1,5 +1,8 @@
-<view class="page-container">
-  <!-- Tabs -->
+<view class="page-shell">
+  <view class="page-header ui-hero-glass">
+    <view class="page-title">二维码工具</view>
+    <view class="page-subtitle">生成、识别、历史记录一体化处理</view>
+  </view>
   <view class="tabs">
     <view class="tab-item {{activeTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="{{0}}">生成</view>
     <view class="tab-item {{activeTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="{{1}}">识别</view>
@@ -8,12 +11,13 @@
 
   <!-- Generate Tab -->
   <view class="tab-content" wx:if="{{activeTab === 0}}">
-    <view class="card input-card">
+    <view class="card ui-soft-card input-card">
+      <view class="ui-section-title">输入内容</view>
       <textarea class="text-input" placeholder="输入文本或网址..." value="{{inputText}}" bindinput="onInput" maxlength="500"></textarea>
     </view>
 
-    <view class="card settings-card">
-      <view class="section-header">样式设置</view>
+    <view class="card ui-soft-card settings-card">
+      <view class="ui-section-title">样式设置</view>
       
       <!-- 尺寸选择 -->
       <view class="setting-item column">
@@ -25,7 +29,7 @@
           <view class="radio-btn {{sizeType === 'custom' ? 'active' : ''}}" bindtap="onSizeSelect" data-size="{{customSize}}" data-type="custom">自定义</view>
         </view>
         <view wx:if="{{sizeType === 'custom'}}" class="custom-input-row">
-          <input class="input-bordered" type="number" value="{{customSize}}" bindinput="onCustomSizeInput" placeholder="输入尺寸(100-1000)" />
+          <input class="input-bordered ui-input-surface" type="number" value="{{customSize}}" bindinput="onCustomSizeInput" placeholder="输入尺寸(100-1000)" />
           <text>px</text>
         </view>
       </view>
@@ -49,16 +53,16 @@
           <view class="radio-btn {{textLocation === 'bottom' ? 'active' : ''}}" bindtap="onTextLocationSelect" data-loc="bottom">码下</view>
         </view>
         <view wx:if="{{textLocation !== 'none'}}" class="text-config-area">
-          <input class="input-bordered full-width" value="{{textContent}}" bindinput="onTextContentInput" placeholder="请输入显示的文字" />
+          <input class="input-bordered full-width ui-input-surface" value="{{textContent}}" bindinput="onTextContentInput" placeholder="请输入显示的文字" />
           <view class="text-style-row">
             <view class="color-input-small">
                <text class="label-small">颜色</text>
                <view class="color-preview-dot" style="background: {{textColor}};"></view>
-               <input class="color-input-text" value="{{textColor}}" bindinput="onTextColorInput" placeholder="#000000"/>
+               <input class="color-input-text ui-input-surface" value="{{textColor}}" bindinput="onTextColorInput" placeholder="#000000"/>
             </view>
             <view class="size-input-small">
                <text class="label-small">大小</text>
-               <input class="input-bordered small" type="number" value="{{textSize}}" bindinput="onTextSizeInput" />
+               <input class="input-bordered small ui-input-surface" type="number" value="{{textSize}}" bindinput="onTextSizeInput" />
             </view>
           </view>
         </view>
@@ -70,7 +74,7 @@
           <text class="label-block">前景色</text>
           <view class="color-input-small">
              <view class="color-preview-dot" style="background: {{colorDark}};"></view>
-             <input class="color-input-text" value="{{colorDark}}" bindinput="onColorDarkChange" placeholder="#000000"/>
+             <input class="color-input-text ui-input-surface" value="{{colorDark}}" bindinput="onColorDarkChange" placeholder="#000000"/>
           </view>
         </view>
         <scroll-view scroll-x enable-flex class="color-scroll">
@@ -89,7 +93,7 @@
           <text class="label-block">背景色</text>
           <view class="color-input-small">
              <view class="color-preview-dot" style="background: {{colorLight}};"></view>
-             <input class="color-input-text" value="{{colorLight}}" bindinput="onColorLightChange" placeholder="#ffffff"/>
+             <input class="color-input-text ui-input-surface" value="{{colorLight}}" bindinput="onColorLightChange" placeholder="#ffffff"/>
           </view>
         </view>
         <scroll-view scroll-x enable-flex class="color-scroll">
@@ -113,10 +117,15 @@
       </view>
     </view>
 
-    <view class="card preview-card">
+    <view class="card ui-soft-card preview-card">
+      <view class="ui-section-title">效果预览</view>
       <image wx:if="{{previewImg}}" src="{{previewImg}}" mode="aspectFit" class="preview-image" bindtap="previewBigImage"></image>
-      <view wx:else class="preview-loading">
+      <view wx:elif="{{inputText}}" class="preview-loading">
         <text>生成中...</text>
+      </view>
+      <view wx:else class="ui-empty">
+        <view class="ui-empty-title">等待生成预览</view>
+        <view class="ui-empty-sub">输入文本后点击“生成预览”</view>
       </view>
     </view>
 
@@ -126,13 +135,15 @@
     </view>
 
     <view class="action-bar">
-      <button class="btn btn-primary" bindtap="generateQR">生成预览</button>
-      <button class="btn btn-outline" bindtap="saveImage">保存图片</button>
+      <button class="btn ui-btn-primary" bindtap="generateQR">生成预览</button>
+      <button class="btn ui-btn-outline" bindtap="saveImage">保存图片</button>
     </view>
   </view>
 
   <!-- Recognize Tab -->
   <view class="tab-content" wx:if="{{activeTab === 1}}">
+    <view class="card ui-soft-card">
+      <view class="ui-section-title">识别方式</view>
     <view class="scan-actions">
       <view class="scan-btn-large" bindtap="scanCode">
         <view class="icon-scan">📷</view>
@@ -143,13 +154,14 @@
         <text>相册识别</text>
       </view>
     </view>
+    </view>
 
-    <view class="card result-card" wx:if="{{scanResult}}">
-      <view class="result-header">识别结果</view>
+    <view class="card ui-soft-card result-card" wx:if="{{scanResult}}">
+      <view class="ui-section-title">识别结果</view>
       <text class="result-text" user-select>{{scanResult}}</text>
       <view class="result-actions">
-        <button class="btn btn-sm" bindtap="copyResult">复制</button>
-        <button class="btn btn-sm btn-warning" wx:if="{{isUrl}}" bindtap="openLink">打开链接</button>
+        <button class="btn btn-sm ui-btn-primary" bindtap="copyResult">复制</button>
+        <button class="btn btn-sm ui-btn-warning" wx:if="{{isUrl}}" bindtap="openLink">打开链接</button>
       </view>
     </view>
   </view>
@@ -167,7 +179,10 @@
           <view class="history-delete" bindtap="deleteHistoryItem" data-index="{{index}}">×</view>
         </view>
       </block>
-      <view wx:else class="empty-state">暂无历史记录</view>
+      <view wx:else class="ui-empty">
+        <view class="ui-empty-title">暂无历史记录</view>
+        <view class="ui-empty-sub">生成或识别后会自动保存</view>
+      </view>
     </view>
     <view wx:if="{{historyList.length > 0}}" class="clear-history-btn" bindtap="clearHistory">清空历史</view>
   </view>
