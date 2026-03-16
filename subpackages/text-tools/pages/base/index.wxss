@@ -1,1 +1,67 @@
-/* subpackages/text-tools/pages/base/index.wxss */
+<view class="page-container">
+  <!-- 输入区 -->
+  <view class="card input-card">
+    <view class="header-row">
+      <text class="label">输入</text>
+      <picker bindchange="onInputBaseChange" value="{{inputBaseIndex}}" range="{{baseOptions}}" range-key="label">
+        <view class="picker-btn">
+          {{baseOptions[inputBaseIndex].label}} ▾
+        </view>
+      </picker>
+    </view>
+    <textarea class="text-input" 
+      placeholder="在此输入数字..." 
+      value="{{inputText}}" 
+      bindinput="onInput" 
+      maxlength="-1" 
+      auto-height
+    ></textarea>
+    <view class="input-actions">
+      <view class="clear-btn" bindtap="clear" wx:if="{{inputText}}">清空</view>
+    </view>
+  </view>
+
+  <!-- 转换图标 (改为设置行) -->
+  <view class="control-row">
+    <view class="format-switch" bindtap="toggleFormat">
+      <view class="checkbox {{isFormatted ? 'checked' : ''}}"></view>
+      <text>格式化显示</text>
+    </view>
+  </view>
+
+  <!-- 输出区 (列表展示) -->
+  <view class="output-list">
+    <block wx:if="{{results.length > 0}}">
+      <view class="card result-card" wx:for="{{results}}" wx:key="base">
+        <view class="result-header">
+          <text class="result-label">{{item.label}}</text>
+          <view class="btn-copy-small" bindtap="copyResult" data-text="{{item.value}}">复制</view>
+        </view>
+        <view class="result-content" user-select>{{item.value}}</view>
+      </view>
+    </block>
+    <view wx:elif="{{errorMsg}}" class="card error-card">
+      <text class="error-text">{{errorMsg}}</text>
+    </view>
+    <view wx:else class="empty-tip">
+      输入数字即可自动转换
+    </view>
+  </view>
+
+  <!-- 常用对照表 (可选) -->
+  <view class="card table-card">
+    <view class="card-title">常用对照</view>
+    <view class="base-table">
+      <view class="table-header">
+        <text>Dec</text>
+        <text>Hex</text>
+        <text>Bin</text>
+      </view>
+      <block wx:for="{{[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]}}" wx:key="*this">
+        <view class="table-row">
+          <text>{{item}}</text>
+          <text>{{item < 10 ? item : (item===10?'A':item===11?'B':item===12?'C':item===13?'D':item===14?'E':'F')}}</text>
+          <text>{{item === 0 ? '0000' : (item === 1 ? '0001' : (item === 2 ? '0010' : (item === 3 ? '0011' : (item === 4 ? '0100' : (item === 5 ? '0101' : (item === 6 ? '0110' : (item === 7 ? '0111' : (item === 8 ? '1000' : (item === 9 ? '1001' : (item === 10 ? '1010' : (item === 11 ? '1011' : (item === 12 ? '1100' : (item === 13 ? '1101' : (item === 14 ? '1110' : '1111'))))))))))))))}}</text>
+        </view>
+      </block>
+    </view  </view</view>
