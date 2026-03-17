@@ -37,6 +37,41 @@
   background: linear-gradient(135deg, #f1f5f9 0%, #eef2ff 100%);
 }
 
+.tool-iconfont {
+  font-family: "tool-iconfont";
+  font-size: 56rpx;
+  line-height: 1;
+  color: #0f172a;
+}
+
+.icon-charcount::before {
+  content: "\f031";
+}
+
+.icon-qrcode::before {
+  content: "\f029";
+}
+
+.icon-cron::before {
+  content: "\f017";
+}
+
+.icon-base::before {
+  content: "\f1ec";
+}
+
+.icon-stitch::before {
+  content: "\f547";
+}
+
+.icon-watermark::before {
+  content: "\f043";
+}
+
+.icon-idphoto::before {
+  content: "\f2c2";
+}
+
 .tool-name {
   font-size: 28rpx;
   font-weight: 600;
