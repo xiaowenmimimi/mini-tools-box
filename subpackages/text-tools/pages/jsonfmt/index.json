@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "JSON格式化"
+  "navigationBarTitleText": "JSON格式化",
+  "enableShareAppMessage": true,
+  "enableShareTimeline": true
 }

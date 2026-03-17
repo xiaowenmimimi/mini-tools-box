@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "二维码工具",
+  "enableShareAppMessage": true,
+  "enableShareTimeline": true,
   "usingComponents": {
     "tool-card": "/components/tool-card/index"
   }

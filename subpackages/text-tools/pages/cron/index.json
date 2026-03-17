@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "Cron表达式"
+  "navigationBarTitleText": "Cron表达式",
+  "enableShareAppMessage": true,
+  "enableShareTimeline": true
 }

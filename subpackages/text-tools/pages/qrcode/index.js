@@ -498,5 +498,16 @@ Page({
         isUrl: /^(http|https):\/\//.test(item.content)
       })
     }
+  },
+  onShareAppMessage() {
+    return {
+      title: '二维码工具：生成与识别',
+      path: `/${this.route}`
+    }
+  },
+  onShareTimeline() {
+    return {
+      title: '二维码工具：生成与识别'
+    }
   }
 })

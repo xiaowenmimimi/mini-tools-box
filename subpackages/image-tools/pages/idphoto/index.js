@@ -137,5 +137,16 @@ Page({
       await wx.saveImageToPhotosAlbum({ filePath: tempFilePath })
       wx.showToast({ title:'已保存到相册', icon:'success' })
     }catch(e){ wx.showToast({ title:'导出失败', icon:'none' }) }
+  },
+  onShareAppMessage() {
+    return {
+      title: '证件照处理工具',
+      path: `/${this.route}`
+    }
+  },
+  onShareTimeline() {
+    return {
+      title: '证件照处理工具'
+    }
   }
 })

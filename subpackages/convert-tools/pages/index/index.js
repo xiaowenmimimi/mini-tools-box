@@ -8,5 +8,16 @@ Page({
   onToolClick(e) {
     const tool = e.detail.tool;
     wx.navigateTo({ url: tool.path });
+  },
+  onShareAppMessage() {
+    return {
+      title: '转换工具箱：进制与时间转换',
+      path: `/${this.route}`
+    };
+  },
+  onShareTimeline() {
+    return {
+      title: '转换工具箱：进制与时间转换'
+    };
   }
 });

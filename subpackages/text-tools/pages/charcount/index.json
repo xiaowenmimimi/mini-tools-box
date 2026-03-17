@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "字符计数"
+  "navigationBarTitleText": "字符计数",
+  "enableShareAppMessage": true,
+  "enableShareTimeline": true
 }

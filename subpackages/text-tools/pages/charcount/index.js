@@ -22,5 +22,16 @@ Page({
       else bytes+=4
     }
     return { length:len, nonSpace, words, lines, spaces, newlines, bytes }
+  },
+  onShareAppMessage() {
+    return {
+      title: '字符计数工具',
+      path: `/${this.route}`
+    }
+  },
+  onShareTimeline() {
+    return {
+      title: '字符计数工具'
+    }
   }
 })

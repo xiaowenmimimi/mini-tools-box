@@ -86,5 +86,16 @@ Page({
     const line = part.split('\n').length
     const col = pos - part.lastIndexOf('\n')
     return `${msg}（第 ${line} 行，第 ${col} 列）`
+  },
+  onShareAppMessage() {
+    return {
+      title: 'JSON 格式化工具',
+      path: `/${this.route}`
+    }
+  },
+  onShareTimeline() {
+    return {
+      title: 'JSON 格式化工具'
+    }
   }
 })

@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "文本工具箱",
+  "enableShareAppMessage": true,
+  "enableShareTimeline": true,
   "usingComponents": {
     "tool-grid": "/components/tool-grid/index",
     "tool-card": "/components/tool-card/index"

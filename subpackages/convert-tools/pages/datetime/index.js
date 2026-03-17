@@ -327,5 +327,16 @@ Page({
   },
   pad2(n) {
     return String(n).padStart(2, '0')
+  },
+  onShareAppMessage() {
+    return {
+      title: '时间转换工具',
+      path: `/${this.route}`
+    }
+  },
+  onShareTimeline() {
+    return {
+      title: '时间转换工具'
+    }
   }
 })

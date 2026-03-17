@@ -199,5 +199,16 @@ Page({
           data: this.data.cronExpression,
           success: () => wx.showToast({ title: '已复制' })
       })
+  },
+  onShareAppMessage() {
+    return {
+      title: 'Cron 表达式工具',
+      path: `/${this.route}`
+    }
+  },
+  onShareTimeline() {
+    return {
+      title: 'Cron 表达式工具'
+    }
   }
 })

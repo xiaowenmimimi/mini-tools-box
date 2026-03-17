@@ -643,5 +643,16 @@ Page({
       
       wx.showToast({ title: '导出失败:' + (err.errMsg || '未知错误'), icon: 'none' });
     }
-  }  
+  },
+  onShareAppMessage() {
+    return {
+      title: '长图拼接工具',
+      path: `/${this.route}`
+    };
+  },
+  onShareTimeline() {
+    return {
+      title: '长图拼接工具'
+    };
+  }
 });

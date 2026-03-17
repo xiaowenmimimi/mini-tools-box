@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "长图拼接"
+  "navigationBarTitleText": "长图拼接",
+  "enableShareAppMessage": true,
+  "enableShareTimeline": true
 }

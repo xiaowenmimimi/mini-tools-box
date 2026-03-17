@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "时间转换"
+  "navigationBarTitleText": "时间转换",
+  "enableShareAppMessage": true,
+  "enableShareTimeline": true
 }

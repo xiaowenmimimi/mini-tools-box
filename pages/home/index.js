@@ -12,5 +12,16 @@ Page({
     const index = e.currentTarget.dataset.index;
     const tool = this.data.tools[index];
     wx.navigateTo({url: tool.path});
+  },
+  onShareAppMessage() {
+    return {
+      title: 'Mini Tools Box 实用工具箱',
+      path: `/${this.route}`
+    };
+  },
+  onShareTimeline() {
+    return {
+      title: 'Mini Tools Box 实用工具箱'
+    };
   }
 });

@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "证件照处理"
+  "navigationBarTitleText": "证件照处理",
+  "enableShareAppMessage": true,
+  "enableShareTimeline": true
 }

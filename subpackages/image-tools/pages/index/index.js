@@ -9,5 +9,16 @@ Page({
   onToolClick(e) {
     const tool = e.detail.tool;
     wx.navigateTo({ url: tool.path });
+  },
+  onShareAppMessage() {
+    return {
+      title: '图像工具箱：拼接/水印/证件照',
+      path: `/${this.route}`
+    };
+  },
+  onShareTimeline() {
+    return {
+      title: '图像工具箱：拼接/水印/证件照'
+    };
   }
 });

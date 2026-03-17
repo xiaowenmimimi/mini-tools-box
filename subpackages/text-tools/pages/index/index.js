@@ -7,5 +7,16 @@ Page({
       { id:'jsonfmt', name:'JSON格式化', desc:'格式化/压缩', icon:'icon-json', iconType:'iconfont', iconClass:'json-icon', path:'/subpackages/text-tools/pages/jsonfmt/index' }
     ]
   },
-  onToolClick(e){ const tool=e.detail.tool; wx.navigateTo({ url: tool.path }); }
+  onToolClick(e){ const tool=e.detail.tool; wx.navigateTo({ url: tool.path }); },
+  onShareAppMessage() {
+    return {
+      title: '文本工具箱：字符/二维码/Cron/JSON',
+      path: `/${this.route}`
+    }
+  },
+  onShareTimeline() {
+    return {
+      title: '文本工具箱：字符/二维码/Cron/JSON'
+    }
+  }
 })

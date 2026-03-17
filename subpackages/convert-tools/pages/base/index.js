@@ -154,5 +154,16 @@ Page({
           res = res * baseBig + BigInt(val)
       }
       return res
+  },
+  onShareAppMessage() {
+    return {
+      title: '进制转换工具',
+      path: `/${this.route}`
+    }
+  },
+  onShareTimeline() {
+    return {
+      title: '进制转换工具'
+    }
   }
 })
