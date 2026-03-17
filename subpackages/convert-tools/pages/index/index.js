@@ -1,7 +1,8 @@
 Page({
   data: {
     tools: [
-      { id: 'base', name: '进制转换', desc: '二/十/十六进制', icon: 'icon-base', iconType: 'iconfont', iconClass: 'conv-base-icon', path: '/subpackages/convert-tools/pages/base/index' }
+      { id: 'base', name: '进制转换', desc: '二/十/十六进制', icon: 'icon-base', iconType: 'iconfont', iconClass: 'conv-base-icon', path: '/subpackages/convert-tools/pages/base/index' },
+      { id: 'datetime', name: '时间转换', desc: '时间戳/时区', icon: 'icon-datetime', iconType: 'iconfont', iconClass: 'conv-datetime-icon', path: '/subpackages/convert-tools/pages/datetime/index' }
     ]
   },
   onToolClick(e) {

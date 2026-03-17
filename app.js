@@ -51,7 +51,7 @@ App({
       {
         id: 'convert',
         name: '转换工具箱',
-        desc: '进制',
+        desc: '进制 / 时间',
         icon: 'icon-home-convert',
         iconType: 'iconfont',
         path: '/subpackages/convert-tools/pages/index/index'

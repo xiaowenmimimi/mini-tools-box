@@ -26,7 +26,8 @@
       "root": "subpackages/convert-tools",
       "pages": [
         "pages/index/index",
-        "pages/base/index"
+        "pages/base/index",
+        "pages/datetime/index"
       ]
     }
   ],

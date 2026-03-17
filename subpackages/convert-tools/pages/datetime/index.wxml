@@ -1,0 +1,95 @@
+<view class="page-shell">
+  <view class="page-header ui-hero-glass">
+    <view class="page-title">时间转换</view>
+    <view class="page-subtitle">时间戳、日期格式与时区互转</view>
+  </view>
+
+  <view class="tabs">
+    <view class="tab-item {{activeTab === 'convert' ? 'active' : ''}}" data-tab="convert" bindtap="switchTab">时间转换</view>
+    <view class="tab-item {{activeTab === 'history' ? 'active' : ''}}" data-tab="history" bindtap="switchTab">最近记录</view>
+  </view>
+
+  <block wx:if="{{activeTab === 'convert'}}">
+    <view class="sub-tabs">
+      <view class="sub-tab-item {{inputMode === 'timestamp' ? 'active' : ''}}" data-mode="timestamp" bindtap="switchMode">时间戳输入</view>
+      <view class="sub-tab-item {{inputMode === 'datetime' ? 'active' : ''}}" data-mode="datetime" bindtap="switchMode">日期输入</view>
+    </view>
+
+    <view class="card ui-soft-card input-card">
+      <view class="ui-section-title">输入</view>
+      <input
+        wx:if="{{inputMode === 'timestamp'}}"
+        class="input-control"
+        type="text"
+        value="{{timestampInput}}"
+        bindinput="onTimestampInput"
+        placeholder="输入时间戳，支持秒或毫秒"
+        maxlength="30"
+      />
+      <input
+        wx:else
+        class="input-control"
+        type="text"
+        value="{{datetimeInput}}"
+        bindinput="onDatetimeInput"
+        placeholder="例如 2026-03-17 14:30:00"
+        maxlength="40"
+      />
+
+      <view class="field-label">目标时区偏移</view>
+      <picker bindchange="onOffsetChange" value="{{offsetIndex}}" range="{{offsetOptions}}" range-key="label">
+        <view class="picker-btn">{{offsetOptions[offsetIndex].label}} ▾</view>
+      </picker>
+      <view class="flow-hint">当前模式输入为空时，结果按当前时间自动刷新</view>
+
+      <view class="toolbar">
+        <button class="btn ui-btn-primary" bindtap="fillNow">当前时间</button>
+        <button class="btn ui-btn-warning" bindtap="clearInputs">清空</button>
+        <button class="btn ui-btn-primary" bindtap="onSaveHistory">保存记录</button>
+      </view>
+    </view>
+
+    <view class="output-list">
+      <block wx:if="{{results.length > 0}}">
+        <view class="card ui-soft-card result-card" wx:for="{{results}}" wx:key="label">
+          <view class="result-header">
+            <text class="result-label">{{item.label}}</text>
+            <view class="btn-copy-small" bindtap="copyResult" data-text="{{item.value}}">复制</view>
+          </view>
+          <view class="result-content" user-select>{{item.value}}</view>
+        </view>
+      </block>
+      <view wx:elif="{{errorMsg}}" class="card ui-soft-card error-card">
+        <text class="error-text">{{errorMsg}}</text>
+      </view>
+      <view wx:else class="ui-empty">
+        <view class="ui-empty-title">暂无转换结果</view>
+        <view class="ui-empty-sub">输入时间戳或日期时间后自动转换</view>
+      </view>
+    </view>
+  </block>
+
+  <view wx:else class="history-list">
+    <view class="history-actions" wx:if="{{historyList.length > 0}}">
+      <button class="btn ui-btn-warning" bindtap="clearHistory">清空记录</button>
+    </view>
+    <block wx:if="{{historyList.length > 0}}">
+      <view class="card ui-soft-card history-card" wx:for="{{historyList}}" wx:key="id">
+        <view class="history-header">
+          <view class="history-mode">{{item.mode === 'timestamp' ? '时间戳输入' : '日期输入'}}</view>
+          <view class="history-time">{{item.displayTime}}</view>
+        </view>
+        <view class="history-input" user-select>{{item.inputText}}</view>
+        <view class="history-offset">{{item.offsetLabel}}</view>
+        <view class="history-toolbar">
+          <view class="history-btn" bindtap="applyHistory" data-item="{{item}}">回填</view>
+          <view class="history-btn danger" bindtap="deleteHistoryItem" data-id="{{item.id}}">删除</view>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="ui-empty">
+      <view class="ui-empty-title">暂无历史记录</view>
+      <view class="ui-empty-sub">复制结果或点击保存记录后可在这里回填</view>
+    </view>
+  </view>
+</view>

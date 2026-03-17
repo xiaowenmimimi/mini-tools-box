@@ -60,6 +60,10 @@
   content: "\f1ec";
 }
 
+.icon-datetime::before {
+  content: "\f073";
+}
+
 .icon-json::before {
   content: "\f15c";
 }
