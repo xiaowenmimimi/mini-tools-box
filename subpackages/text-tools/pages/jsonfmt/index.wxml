@@ -1,0 +1,47 @@
+<view class="page-shell">
+  <view class="page-header ui-hero-glass">
+    <view class="page-title">JSON格式化</view>
+    <view class="page-subtitle">格式化、压缩与校验 JSON</view>
+  </view>
+
+  <view class="card ui-soft-card section-card">
+    <view class="header-row">
+      <view class="ui-section-title">输入 JSON</view>
+      <picker bindchange="onIndentChange" value="{{indentIndex}}" range="{{indentOptions}}" range-key="label">
+        <view class="indent-pill">缩进：{{indentOptions[indentIndex].label}}</view>
+      </picker>
+    </view>
+    <textarea
+      class="text-input ui-input-surface"
+      placeholder="在此粘贴 JSON 内容..."
+      value="{{inputText}}"
+      auto-height="true"
+      maxlength="-1"
+      bindinput="onInput"
+    ></textarea>
+    <view class="toolbar action-bar">
+      <button class="btn ui-btn-primary action-btn" bindtap="formatJson">格式化</button>
+      <button class="btn ui-btn-outline action-btn" bindtap="minifyJson">压缩</button>
+      <button class="btn ui-btn-outline action-btn" bindtap="validateJson">校验</button>
+      <button class="btn ui-btn-warning action-btn" bindtap="clearAll">清空</button>
+    </view>
+  </view>
+
+  <view wx:if="{{errorMsg}}" class="card ui-soft-card error-card">
+    <view class="error-text">{{errorMsg}}</view>
+  </view>
+
+  <view class="card ui-soft-card section-card">
+    <view class="result-header">
+      <view class="ui-section-title">输出结果</view>
+      <button class="btn ui-btn-primary copy-btn" bindtap="copyOutput">复制</button>
+    </view>
+    <view wx:if="{{outputText}}" class="result-box">
+      <text selectable="{{true}}" class="result-text">{{outputText}}</text>
+    </view>
+    <view wx:else class="ui-empty">
+      <view class="ui-empty-title">暂无输出</view>
+      <view class="ui-empty-sub">点击格式化或压缩后展示结果</view>
+    </view>
+  </view>
+</view>

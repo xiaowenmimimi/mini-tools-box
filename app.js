@@ -43,7 +43,7 @@ App({
       {
         id: 'text',
         name: '文本工具箱',
-        desc: '字符 / 二维码 / Cron',
+        desc: '字符 / 二维码 / Cron / JSON',
         icon: 'icon-home-text',
         iconType: 'iconfont',
         path: '/subpackages/text-tools/pages/index/index'

@@ -18,7 +18,8 @@
         "pages/index/index",
         "pages/charcount/index",
         "pages/qrcode/index",
-        "pages/cron/index"
+        "pages/cron/index",
+        "pages/jsonfmt/index"
       ]
     },
     {

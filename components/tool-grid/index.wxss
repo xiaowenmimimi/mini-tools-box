@@ -60,6 +60,10 @@
   content: "\f1ec";
 }
 
+.icon-json::before {
+  content: "\f15c";
+}
+
 .icon-stitch::before {
   content: "\f547";
 }

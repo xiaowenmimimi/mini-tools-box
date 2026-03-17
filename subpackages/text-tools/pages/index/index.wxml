@@ -1,7 +1,7 @@
 <view class="page-shell">
   <view class="page-header ui-hero-glass">
     <view class="page-title">文本工具箱</view>
-    <view class="page-subtitle">字符统计、二维码、Cron</view>
+    <view class="page-subtitle">字符统计、二维码、Cron、JSON</view>
   </view>
   <view class="card ui-soft-card">
     <view class="ui-section-title entry-title">功能入口</view>
