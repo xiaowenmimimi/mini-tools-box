@@ -35,13 +35,15 @@ App({
       {
         id: 'image',
         name: '图像工具箱',
-        icon: '🖼️',
+        icon: 'icon-home-image',
+        iconType: 'iconfont',
         path: '/subpackages/image-tools/pages/index/index'
       },
       {
         id: 'text',
         name: '文本工具箱',
-        icon: '🔤',
+        icon: 'icon-home-text',
+        iconType: 'iconfont',
         path: '/subpackages/text-tools/pages/index/index'
       }
       // 后续可添加更多工具箱

@@ -1,4 +1,7 @@
 Component({
+  options: {
+    styleIsolation: 'apply-shared'
+  },
   properties: {
     tools: {
       type: Array,

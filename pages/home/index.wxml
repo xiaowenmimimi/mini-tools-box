@@ -13,7 +13,10 @@
     <block wx:for="{{tools}}" wx:key="id">
       <view class="tool-item" bindtap="goTool" data-index="{{index}}">
         <view class="tool-icon-wrap">
-          <view class="tool-icon">{{item.icon}}</view>
+          <view class="tool-icon">
+            <text wx:if="{{item.iconType === 'iconfont'}}" class="tool-iconfont {{item.icon}}"></text>
+            <text wx:else>{{item.icon}}</text>
+          </view>
         </view>
         <view class="tool-name">{{item.name}}</view>
         <view class="tool-desc">{{item.id === 'image' ? '拼接 / 水印 / 证件照' : '字符 / 二维码 / Cron / 进制'}}</view>
