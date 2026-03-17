@@ -1,7 +1,7 @@
 <view class="page-shell">
   <view class="page-header ui-hero-glass home-hero">
     <view class="page-title">Mini Tools Box</view>
-    <view class="page-subtitle">常用工具集合，快速进入文本与图像处理场景</view>
+    <view class="page-subtitle">常用工具集合，快速进入文本、图像与转换场景</view>
     <view class="hero-meta">
       <view class="ui-pill ui-pill-success">{{tools.length}} 个工具箱</view>
       <view class="ui-pill ui-pill-info">持续更新中</view>
@@ -19,7 +19,7 @@
           </view>
         </view>
         <view class="tool-name">{{item.name}}</view>
-        <view class="tool-desc">{{item.id === 'image' ? '拼接 / 水印 / 证件照' : '字符 / 二维码 / Cron / 进制'}}</view>
+        <view class="tool-desc">{{item.desc}}</view>
       </view>
     </block>
     </view>

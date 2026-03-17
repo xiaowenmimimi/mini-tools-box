@@ -56,6 +56,25 @@
   font-size: 70rpx;
 }
 
+.tool-iconfont {
+  font-family: "tool-iconfont";
+  font-size: 66rpx;
+  line-height: 1;
+  color: #0f172a;
+}
+
+.icon-home-image::before {
+  content: "\f03e";
+}
+
+.icon-home-text::before {
+  content: "\f031";
+}
+
+.icon-home-convert::before {
+  content: "\f074";
+}
+
 .tool-name {
   font-size: 30rpx;
   font-weight: 700;

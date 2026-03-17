@@ -1,0 +1,7 @@
+.conv-base-icon {
+  background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%) !important;
+}
+
+.entry-title {
+  margin-bottom: 20rpx;
+}

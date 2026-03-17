@@ -35,6 +35,7 @@ App({
       {
         id: 'image',
         name: '图像工具箱',
+        desc: '拼接 / 水印 / 证件照',
         icon: 'icon-home-image',
         iconType: 'iconfont',
         path: '/subpackages/image-tools/pages/index/index'
@@ -42,9 +43,18 @@ App({
       {
         id: 'text',
         name: '文本工具箱',
+        desc: '字符 / 二维码 / Cron',
         icon: 'icon-home-text',
         iconType: 'iconfont',
         path: '/subpackages/text-tools/pages/index/index'
+      },
+      {
+        id: 'convert',
+        name: '转换工具箱',
+        desc: '进制',
+        icon: 'icon-home-convert',
+        iconType: 'iconfont',
+        path: '/subpackages/convert-tools/pages/index/index'
       }
       // 后续可添加更多工具箱
     ]

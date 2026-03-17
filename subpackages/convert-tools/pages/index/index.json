@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "转换工具箱",
+  "usingComponents": {
+    "tool-grid": "/components/tool-grid/index",
+    "tool-card": "/components/tool-card/index"
+  }
+}
