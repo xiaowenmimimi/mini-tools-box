@@ -55,6 +55,14 @@ App({
         icon: 'icon-home-convert',
         iconType: 'iconfont',
         path: '/subpackages/convert-tools/pages/index/index'
+      },
+      {
+        id: 'security',
+        name: '安全工具箱',
+        desc: '密码',
+        icon: 'icon-home-security',
+        iconType: 'iconfont',
+        path: '/subpackages/security-tools/pages/index/index'
       }
       // 后续可添加更多工具箱
     ]

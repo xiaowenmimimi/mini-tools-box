@@ -84,6 +84,10 @@
   content: "\f2c2";
 }
 
+.icon-password::before {
+  content: "\f084";
+}
+
 .tool-name {
   font-size: 28rpx;
   font-weight: 600;

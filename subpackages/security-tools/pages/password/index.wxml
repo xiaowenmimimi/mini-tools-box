@@ -1,0 +1,105 @@
+<view class="page-shell">
+  <view class="page-header ui-hero-glass">
+    <view class="page-title">密码生成器</view>
+    <view class="page-subtitle">快速生成并复制随机强密码</view>
+  </view>
+
+  <view class="tabs">
+    <view class="tab-item {{activeTag === 'generator' ? 'active' : ''}}" data-tag="generator" bindtap="onTagChange">生成</view>
+    <view class="tab-item {{activeTag === 'history' ? 'active' : ''}}" data-tag="history" bindtap="onTagChange">历史记录 {{historyRecords.length}}</view>
+  </view>
+
+  <block wx:if="{{activeTag === 'generator'}}">
+    <view class="card ui-soft-card section-card result-card">
+      <view class="result-top">
+        <view class="ui-section-title">生成结果</view>
+        <view class="strength-pill">{{strengthLabel}}</view>
+      </view>
+      <view class="password-box" user-select wx:if="{{generatedPassword}}">{{generatedPassword}}</view>
+      <view class="password-box password-placeholder" wx:else>点击下方按钮生成密码</view>
+      <view class="strength-track">
+        <view class="strength-fill" style="width: {{strengthPercent}}%;"></view>
+      </view>
+      <view class="meta-row">
+        <text>强度：{{strengthLabel}}</text>
+        <text>熵值：约 {{entropyBits}} bits</text>
+      </view>
+      <view class="toolbar">
+        <button class="btn ui-btn-primary" bindtap="onRegenerateTap">重新生成</button>
+        <button class="btn ui-btn-outline" bindtap="copyPassword">复制密码</button>
+        <button class="btn ui-btn-warning" bindtap="onSaveHistoryTap">保存到历史</button>
+      </view>
+    </view>
+
+    <view class="card ui-soft-card section-card settings-card">
+      <view class="ui-section-title">生成设置</view>
+      <view class="group-title">密码长度</view>
+      <view class="field-row">
+        <view class="range">
+          <view class="value-pill">{{length}}</view>
+          <slider min="6" max="64" step="1" value="{{length}}" activeColor="#10B981" backgroundColor="#e5e7eb" block-size="24" show-value="false" bindchanging="onLengthChanging" bindchange="onLengthChange"></slider>
+        </view>
+      </view>
+
+      <view class="group-title">字符集</view>
+      <view class="switch-grid">
+        <view class="switch-item">
+          <text>大写 A-Z</text>
+          <switch checked="{{includeUppercase}}" data-field="includeUppercase" bindchange="onOptionChange" color="#10B981"></switch>
+        </view>
+        <view class="switch-item">
+          <text>小写 a-z</text>
+          <switch checked="{{includeLowercase}}" data-field="includeLowercase" bindchange="onOptionChange" color="#10B981"></switch>
+        </view>
+        <view class="switch-item">
+          <text>数字 0-9</text>
+          <switch checked="{{includeNumbers}}" data-field="includeNumbers" bindchange="onOptionChange" color="#10B981"></switch>
+        </view>
+        <view class="switch-item">
+          <text>符号 !@#</text>
+          <switch checked="{{includeSymbols}}" data-field="includeSymbols" bindchange="onOptionChange" color="#10B981"></switch>
+        </view>
+        <view class="switch-item switch-item-full">
+          <text>排除易混字符（如 O/0、I/l/1）</text>
+          <switch checked="{{excludeAmbiguous}}" data-field="excludeAmbiguous" bindchange="onOptionChange" color="#10B981"></switch>
+        </view>
+      </view>
+      <view class="group-title">排除字符</view>
+      <input class="exclude-input ui-input-surface" type="text" value="{{excludedChars}}" bindinput="onExcludedCharsInput" placeholder="例如：Il1O0@#（输入后实时生效）" maxlength="80" />
+      <view wx:if="{{errorMsg}}" class="error-box">{{errorMsg}}</view>
+    </view>
+  </block>
+
+  <view class="card ui-soft-card section-card history-card" wx:elif="{{activeTag === 'history'}}">
+    <view class="ui-section-title">历史记录</view>
+    <view class="history-switch-row">
+      <text>自动过期（24小时）</text>
+      <switch checked="{{autoExpireHistory}}" bindchange="onToggleAutoExpireHistory" color="#10B981"></switch>
+    </view>
+    <view class="history-toolbar">
+      <text class="history-count">最多保留 {{historyRecords.length}} / 20 条</text>
+      <button class="history-clear-btn" bindtap="clearHistory">一键清空</button>
+    </view>
+    <view class="history-empty" wx:if="{{!historyRecords.length}}">暂无历史记录</view>
+    <view class="history-list" wx:else>
+      <view class="history-item" wx:for="{{historyRecords}}" wx:key="id">
+        <view class="history-item-top">
+          <text class="history-password">{{revealedHistoryIds[item.id] ? item.password : item.maskedPassword}}</text>
+          <view class="history-actions">
+            <button class="history-eye-btn {{revealedHistoryIds[item.id] ? 'is-active' : ''}}" data-id="{{item.id}}" bindtap="onToggleHistoryReveal">
+              <text class="history-eye-icon {{revealedHistoryIds[item.id] ? 'icon-eye-slash' : 'icon-eye'}}"></text>
+            </button>
+            <button class="history-copy-btn" data-id="{{item.id}}" bindtap="copyHistoryItem">复制</button>
+          </view>
+        </view>
+        <view class="history-item-meta">
+          <text>{{item.createdAtText}}</text>
+          <view class="history-meta-right">
+            <text>{{item.length}}位 · {{item.strengthLabel}} · {{item.entropyBits}} bits</text>
+            <text wx:if="{{item.expiresAt > 0}}" class="history-expire-tag">自动过期</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

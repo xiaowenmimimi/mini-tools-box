@@ -1,0 +1,7 @@
+.entry-title {
+  margin-bottom: 20rpx;
+}
+
+.password-icon {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
+}

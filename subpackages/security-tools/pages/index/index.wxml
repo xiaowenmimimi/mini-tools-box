@@ -1,0 +1,14 @@
+<view class="page-shell">
+  <view class="page-header ui-hero-glass">
+    <view class="page-title">安全工具箱</view>
+    <view class="page-subtitle">密码生成与安全辅助工具</view>
+  </view>
+  <view class="card ui-soft-card">
+    <view class="ui-section-title entry-title">功能入口</view>
+    <tool-grid wx:if="{{tools.length}}" tools="{{tools}}" columns="{{3}}" bind:toolclick="onToolClick"></tool-grid>
+    <view wx:else class="ui-empty">
+      <view class="ui-empty-title">功能筹备中</view>
+      <view class="ui-empty-sub">即将上线常用安全工具</view>
+    </view>
+  </view>
+</view>

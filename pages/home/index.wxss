@@ -75,6 +75,10 @@
   content: "\f074";
 }
 
+.icon-home-security::before {
+  content: "\f023";
+}
+
 .tool-name {
   font-size: 30rpx;
   font-weight: 700;

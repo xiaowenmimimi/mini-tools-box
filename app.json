@@ -30,6 +30,13 @@
         "pages/datetime/index",
         "pages/color/index"
       ]
+    },
+    {
+      "root": "subpackages/security-tools",
+      "pages": [
+        "pages/index/index",
+        "pages/password/index"
+      ]
     }
   ],
   "window": {
