@@ -7,5 +7,4 @@
     <view class="ui-section-title entry-title">功能入口</view>
     <tool-grid tools="{{tools}}" columns="{{3}}" bind:toolclick="onToolClick"></tool-grid>
   </view>
-  <view class="hint">* 功能持续更新</view>
 </view>
