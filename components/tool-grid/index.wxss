@@ -92,6 +92,10 @@
   content: "\f023";
 }
 
+.icon-totp::before {
+  content: "\f3ed";
+}
+
 .tool-name {
   font-size: 28rpx;
   font-weight: 600;

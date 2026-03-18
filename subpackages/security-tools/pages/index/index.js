@@ -18,6 +18,15 @@ Page({
         iconType: 'iconfont',
         iconClass: 'crypto-icon',
         path: '/subpackages/security-tools/pages/crypto/index'
+      },
+      {
+        id: 'totp',
+        name: '2FA 验证码',
+        desc: '扫码导入与生成',
+        icon: 'icon-totp',
+        iconType: 'iconfont',
+        iconClass: 'totp-icon',
+        path: '/subpackages/security-tools/pages/totp/index'
       }
     ]
   },

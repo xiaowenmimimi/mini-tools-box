@@ -36,7 +36,8 @@
       "pages": [
         "pages/index/index",
         "pages/password/index",
-        "pages/crypto/index"
+        "pages/crypto/index",
+        "pages/totp/index"
       ]
     }
   ],

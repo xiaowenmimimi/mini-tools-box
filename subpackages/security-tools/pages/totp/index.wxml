@@ -1,0 +1,78 @@
+<view class="page-shell">
+  <view class="page-header ui-hero-glass">
+    <view class="page-title">2FA 验证码生成</view>
+    <view class="page-subtitle">多账号管理，支持扫码导入 otpauth</view>
+  </view>
+
+  <view class="tabs">
+    <view class="tab-item {{activeTab === 'codes' ? 'active' : ''}}" data-tab="codes" bindtap="onTabChange">验证码</view>
+    <view class="tab-item {{activeTab === 'accounts' ? 'active' : ''}}" data-tab="accounts" bindtap="onTabChange">账号管理 {{accounts.length}}</view>
+  </view>
+
+  <view wx:if="{{activeTab === 'codes'}}" class="card ui-soft-card section-card">
+    <view class="result-top">
+      <view class="ui-section-title">实时验证码</view>
+      <button class="btn ui-btn-outline small-btn" bindtap="refreshNow">立即刷新</button>
+    </view>
+    <view wx:if="{{!accounts.length}}" class="empty-box">暂无账号，请先到“账号管理”添加或扫码导入</view>
+    <view wx:else class="code-list">
+      <view class="code-item" wx:for="{{accounts}}" wx:key="id">
+        <view class="code-head">
+          <view class="code-name">{{item.displayName}}</view>
+          <view class="code-meta">{{item.algorithm}} · {{item.digits}} 位 · {{item.period}}s</view>
+        </view>
+        <view class="code-value">{{codeMap[item.id].code || '------'}}</view>
+        <view class="code-foot">
+          <text>剩余 {{codeMap[item.id].remaining || item.period}} 秒</text>
+          <button class="btn ui-btn-primary mini-copy-btn" data-id="{{item.id}}" bindtap="copyCode">复制</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{activeTab === 'accounts'}}" class="card ui-soft-card section-card">
+    <view class="ui-section-title">新增账号</view>
+    <input class="ui-input-surface input-item" value="{{formIssuer}}" bindinput="onIssuerInput" placeholder="发行方（可选，如 GitHub）" maxlength="64" />
+    <input class="ui-input-surface input-item" value="{{formAccount}}" bindinput="onAccountInput" placeholder="账号标识（可选，如 you@example.com）" maxlength="128" />
+    <input class="ui-input-surface input-item secret-input" value="{{formSecret}}" bindinput="onSecretInput" placeholder="Base32 Secret（必填）" maxlength="256" />
+
+    <view class="row-grid">
+      <picker class="ui-input-surface picker-item" mode="selector" range="{{algorithmOptions}}" range-key="name" value="{{formAlgorithmIndex}}" bindchange="onAlgorithmChange">
+        <view class="picker-inner">算法：{{algorithmOptions[formAlgorithmIndex].name}}</view>
+      </picker>
+      <picker class="ui-input-surface picker-item" mode="selector" range="{{digitsOptions}}" value="{{formDigitsIndex}}" bindchange="onDigitsChange">
+        <view class="picker-inner">位数：{{digitsOptions[formDigitsIndex]}}</view>
+      </picker>
+    </view>
+
+    <input class="ui-input-surface input-item" type="number" value="{{formPeriod}}" bindinput="onPeriodInput" placeholder="周期（秒，默认30）" maxlength="3" />
+
+    <view class="toolbar">
+      <button class="btn ui-btn-outline action-btn" bindtap="importByScan">扫码导入</button>
+      <button class="btn ui-btn-primary action-btn" bindtap="addManualAccount">手动添加</button>
+    </view>
+  </view>
+
+  <view wx:if="{{activeTab === 'accounts'}}" class="card ui-soft-card section-card account-list-card">
+    <view class="result-top">
+      <view class="ui-section-title">已保存账号</view>
+      <view class="account-count">{{accounts.length}} / 50</view>
+    </view>
+    <view wx:if="{{!accounts.length}}" class="empty-box">还没有保存任何账号</view>
+    <view wx:else class="account-list">
+      <view class="account-item" wx:for="{{accounts}}" wx:key="id">
+        <view class="account-title">{{item.displayName}}</view>
+        <view class="account-sub" wx:if="{{item.account}}">{{item.account}}</view>
+        <view class="account-meta">{{item.algorithm}} · {{item.digits}} 位 · {{item.period}}s</view>
+        <view class="account-secret">{{item.secretMasked}}</view>
+        <view class="account-bottom">
+          <text>{{item.createdAtText}}</text>
+          <view class="account-actions">
+            <button class="copy-secret-btn" data-id="{{item.id}}" bindtap="copyAccountSecret">复制</button>
+            <button class="delete-btn" data-id="{{item.id}}" bindtap="removeAccount">删除</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

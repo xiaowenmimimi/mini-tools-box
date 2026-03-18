@@ -9,3 +9,7 @@
 .crypto-icon {
   background: linear-gradient(135deg, #ccfbf1 0%, #99f6e4 100%) !important;
 }
+
+.totp-icon {
+  background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%) !important;
+}

@@ -59,7 +59,7 @@ App({
       {
         id: 'security',
         name: '安全工具箱',
-        desc: '密码',
+        desc: '密码 / 2FA',
         icon: 'icon-home-security',
         iconType: 'iconfont',
         path: '/subpackages/security-tools/pages/index/index'
