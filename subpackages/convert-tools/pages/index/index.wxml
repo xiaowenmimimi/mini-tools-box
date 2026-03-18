@@ -1,7 +1,7 @@
 <view class="page-shell">
   <view class="page-header ui-hero-glass">
     <view class="page-title">转换工具箱</view>
-    <view class="page-subtitle">进制与时间转换</view>
+    <view class="page-subtitle">进制、时间与色彩转换</view>
   </view>
   <view class="card ui-soft-card">
     <view class="ui-section-title entry-title">功能入口</view>

@@ -1,0 +1,119 @@
+<view class="page-shell">
+  <view class="page-header ui-hero-glass">
+    <view class="page-title">色彩转换器</view>
+    <view class="page-subtitle">HEX / RGB / HSL 实时互转</view>
+  </view>
+
+  <view class="card ui-soft-card input-card">
+    <view class="ui-section-title">输入转换</view>
+    <view wx:if="{{errorMsg}}" class="input-error-banner">
+      <view class="input-error-text">{{errorMsg}}</view>
+    </view>
+    <view class="picker-entry" bindtap="openColorPicker">
+      <view class="picker-entry-left">
+        <view class="picker-entry-dot" style="background-color: {{previewColor}};"></view>
+        <view class="picker-entry-text">打开颜色选择器</view>
+      </view>
+      <view class="picker-entry-arrow">›</view>
+    </view>
+
+    <view class="field-row">
+      <view class="field-label">HEX</view>
+      <input class="input-control" value="{{hexInput}}" bindinput="onHexInput" maxlength="7" placeholder="#FF8899" />
+    </view>
+
+    <view class="field-row">
+      <view class="field-label">RGB</view>
+      <input class="input-control" value="{{rgbInput}}" bindinput="onRgbInput" maxlength="30" placeholder="16, 185, 129" />
+    </view>
+
+    <view class="field-row">
+      <view class="field-label">HSL</view>
+      <input class="input-control" value="{{hslInput}}" bindinput="onHslInput" maxlength="40" placeholder="160, 84%, 39%" />
+    </view>
+  </view>
+
+  <view class="card ui-soft-card output-card">
+    <view class="ui-section-title">转换结果</view>
+    <view class="preview-wrap">
+      <view class="preview-color" style="background-color: {{previewColor}};"></view>
+      <view class="preview-meta">
+        <view class="preview-hex">{{previewColor}}</view>
+        <view class="preview-tip">点击下方按钮可复制结果</view>
+      </view>
+    </view>
+
+    <view class="result-grid">
+      <view class="result-item">
+        <view class="result-title">HEX</view>
+        <view class="result-value" user-select>{{hexInput}}</view>
+        <view class="btn-copy-small" bindtap="copyValue" data-value="{{hexInput}}">复制</view>
+      </view>
+      <view class="result-item">
+        <view class="result-title">RGB</view>
+        <view class="result-value" user-select>{{rgbInput}}</view>
+        <view class="btn-copy-small" bindtap="copyValue" data-value="{{rgbInput}}">复制</view>
+      </view>
+      <view class="result-item">
+        <view class="result-title">HSL</view>
+        <view class="result-value" user-select>{{hslInput}}</view>
+        <view class="btn-copy-small" bindtap="copyValue" data-value="{{hslInput}}">复制</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card ui-soft-card palette-card">
+    <view class="ui-section-title">常用色板</view>
+    <view class="palette-list">
+      <view
+        wx:for="{{presetColors}}"
+        wx:key="*this"
+        class="palette-item {{previewColor === item ? 'active' : ''}}"
+        style="background-color: {{item}};"
+        bindtap="onPresetTap"
+        data-color="{{item}}"
+      ></view>
+    </view>
+  </view>
+
+  <view wx:if="{{pickerVisible}}" class="picker-mask" bindtap="closeColorPicker" catchtouchmove="onPickerTouchMove">
+    <view class="picker-modal" catchtap="true" catchtouchmove="onPickerTouchMove">
+      <view class="picker-header">
+        <view class="picker-title">颜色选择器</view>
+        <view class="picker-close" bindtap="closeColorPicker">关闭</view>
+      </view>
+
+      <view
+        id="svPanel"
+        class="sv-panel"
+        style="background-color: {{pickerPanelColor}};"
+        bindtouchstart="onSvTouchStart"
+        catchtouchmove="onSvTouchMove"
+      >
+        <view class="sv-white-layer"></view>
+        <view class="sv-black-layer"></view>
+        <view class="sv-cursor" style="left: {{svCursorLeft}}%; top: {{svCursorTop}}%;"></view>
+      </view>
+
+      <view
+        id="hueBar"
+        class="hue-bar"
+        bindtouchstart="onHueTouchStart"
+        catchtouchmove="onHueTouchMove"
+      >
+        <view class="hue-cursor" style="left: {{hueCursorLeft}}%;"></view>
+      </view>
+
+      <view class="picker-values">
+        <view class="picker-preview" style="background-color: {{pickerPreviewColor}};"></view>
+        <view class="picker-value-text">{{pickerPreviewColor}}</view>
+        <view class="picker-hsv-text">H{{pickerH}} S{{pickerS}} V{{pickerV}}</view>
+      </view>
+
+      <view class="picker-actions">
+        <button class="btn ui-btn-outline picker-btn" bindtap="closeColorPicker">取消</button>
+        <button class="btn ui-btn-primary picker-btn" bindtap="confirmColorPicker">应用</button>
+      </view>
+    </view>
+  </view>
+</view>

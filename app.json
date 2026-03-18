@@ -27,7 +27,8 @@
       "pages": [
         "pages/index/index",
         "pages/base/index",
-        "pages/datetime/index"
+        "pages/datetime/index",
+        "pages/color/index"
       ]
     }
   ],

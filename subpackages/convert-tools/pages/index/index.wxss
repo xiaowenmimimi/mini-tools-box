@@ -6,6 +6,10 @@
   background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
 }
 
+.conv-color-icon {
+  background: linear-gradient(135deg, #fce7f3 0%, #ddd6fe 100%) !important;
+}
+
 .entry-title {
   margin-bottom: 20rpx;
 }

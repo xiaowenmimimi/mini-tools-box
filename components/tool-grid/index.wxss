@@ -64,6 +64,10 @@
   content: "\f073";
 }
 
+.icon-color::before {
+  content: "\f53f";
+}
+
 .icon-json::before {
   content: "\f15c";
 }
