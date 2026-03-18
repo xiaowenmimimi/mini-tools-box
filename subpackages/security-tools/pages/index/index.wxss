@@ -5,3 +5,7 @@
 .password-icon {
   background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
 }
+
+.crypto-icon {
+  background: linear-gradient(135deg, #ccfbf1 0%, #99f6e4 100%) !important;
+}

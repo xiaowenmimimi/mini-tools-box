@@ -9,6 +9,15 @@ Page({
         iconType: 'iconfont',
         iconClass: 'password-icon',
         path: '/subpackages/security-tools/pages/password/index'
+      },
+      {
+        id: 'crypto',
+        name: '加密/解密',
+        desc: 'AES 文本保护',
+        icon: 'icon-crypto',
+        iconType: 'iconfont',
+        iconClass: 'crypto-icon',
+        path: '/subpackages/security-tools/pages/crypto/index'
       }
     ]
   },

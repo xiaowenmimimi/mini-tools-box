@@ -88,6 +88,10 @@
   content: "\f084";
 }
 
+.icon-crypto::before {
+  content: "\f023";
+}
+
 .tool-name {
   font-size: 28rpx;
   font-weight: 600;

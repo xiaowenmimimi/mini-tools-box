@@ -35,7 +35,8 @@
       "root": "subpackages/security-tools",
       "pages": [
         "pages/index/index",
-        "pages/password/index"
+        "pages/password/index",
+        "pages/crypto/index"
       ]
     }
   ],

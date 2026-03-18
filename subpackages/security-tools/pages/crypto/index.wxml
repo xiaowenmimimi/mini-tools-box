@@ -1,0 +1,111 @@
+<view class="page-shell">
+  <view class="page-header ui-hero-glass">
+    <view class="page-title">加密解密文本</view>
+    <view class="page-subtitle">本地文本加密与解密，支持兼容模式</view>
+  </view>
+
+  <view class="tabs">
+    <view class="tab-item {{activeTab === 'encrypt' ? 'active' : ''}}" data-tab="encrypt" bindtap="onTabChange">加密</view>
+    <view class="tab-item {{activeTab === 'decrypt' ? 'active' : ''}}" data-tab="decrypt" bindtap="onTabChange">解密</view>
+    <view class="tab-item {{activeTab === 'history' ? 'active' : ''}}" data-tab="history" bindtap="onTabChange">历史 {{historyRecords.length}}</view>
+  </view>
+
+  <view hidden="{{activeTab !== 'encrypt'}}" class="tab-panel">
+    <view class="card ui-soft-card section-card compact-main-card">
+      <view class="compact-top">
+        <view class="ui-section-title">加密输入</view>
+        <view class="meta-row compact-meta">
+          <text>{{algorithmLabel}}</text>
+          <text>{{formatVersion}}.*</text>
+        </view>
+      </view>
+      <textarea class="text-input ui-input-surface" value="{{plainText}}" bindinput="onPlainTextInput" placeholder="输入要加密的文本..." maxlength="-1"></textarea>
+      <picker class="algo-picker ui-input-surface" mode="selector" range="{{algorithmOptions}}" range-key="name" value="{{selectedAlgorithmIndex}}" bindchange="onAlgorithmChange">
+        <view class="picker-inner">算法：{{algorithmOptions[selectedAlgorithmIndex].name}}</view>
+      </picker>
+      <block wx:if="{{formatVersion !== 'v4'}}">
+        <input class="pass-input ui-input-surface" type="text" value="{{passphrase}}" bindinput="onPassphraseInput" placeholder="输入密码短语" maxlength="128" />
+      </block>
+      <view class="toolbar compact-actions">
+        <button class="btn ui-btn-primary action-btn compact-action-btn" loading="{{isProcessing}}" bindtap="onEncryptTap">开始加密</button>
+        <button class="btn ui-btn-outline action-btn compact-action-btn" bindtap="onClearInputTap">清空</button>
+      </view>
+    </view>
+
+    <view class="card ui-soft-card section-card compact-result-card">
+      <view class="result-top">
+        <view class="ui-section-title">输出结果</view>
+        <view class="toolbar compact">
+          <button class="btn ui-btn-outline small-btn" bindtap="onSwapTap">回填输入</button>
+          <button class="btn ui-btn-primary small-btn" bindtap="onCopyResultTap">复制结果</button>
+          <button class="btn ui-btn-warning small-btn" bindtap="onSaveHistoryTap">保存历史</button>
+        </view>
+      </view>
+      <textarea class="result-input ui-input-surface" value="{{encryptResultText}}" placeholder="输出结果会显示在这里..." maxlength="-1" disabled></textarea>
+    </view>
+  </view>
+
+  <view hidden="{{activeTab !== 'decrypt'}}" class="tab-panel">
+    <view class="card ui-soft-card section-card compact-main-card">
+      <view class="compact-top">
+        <view class="ui-section-title">解密输入</view>
+        <view class="meta-row compact-meta">
+          <text>{{algorithmLabel}}</text>
+          <text>{{formatVersion}}.*</text>
+        </view>
+      </view>
+      <textarea class="text-input ui-input-surface" value="{{cipherText}}" bindinput="onCipherTextInput" placeholder="粘贴密文，支持 v1/v2/v3/v4 格式..." maxlength="-1"></textarea>
+      <picker class="algo-picker ui-input-surface" mode="selector" range="{{algorithmOptions}}" range-key="name" value="{{selectedAlgorithmIndex}}" bindchange="onAlgorithmChange">
+        <view class="picker-inner">算法：{{algorithmOptions[selectedAlgorithmIndex].name}}</view>
+      </picker>
+      <input class="pass-input ui-input-surface" type="text" value="{{passphrase}}" bindinput="onPassphraseInput" placeholder="输入解密密码短语（v4可留空）" maxlength="128" />
+      <view class="toolbar compact-actions">
+        <button class="btn ui-btn-primary action-btn compact-action-btn" loading="{{isProcessing}}" bindtap="onDecryptTap">开始解密</button>
+        <button class="btn ui-btn-outline action-btn compact-action-btn" bindtap="onClearInputTap">清空</button>
+      </view>
+    </view>
+
+    <view class="card ui-soft-card section-card compact-result-card">
+      <view class="result-top">
+        <view class="ui-section-title">输出结果</view>
+        <view class="toolbar compact">
+          <button class="btn ui-btn-outline small-btn" bindtap="onSwapTap">回填输入</button>
+          <button class="btn ui-btn-primary small-btn" bindtap="onCopyResultTap">复制结果</button>
+          <button class="btn ui-btn-warning small-btn" bindtap="onSaveHistoryTap">保存历史</button>
+        </view>
+      </view>
+      <textarea class="result-input ui-input-surface" value="{{decryptResultText}}" placeholder="输出结果会显示在这里..." maxlength="-1" disabled></textarea>
+    </view>
+  </view>
+
+  <view hidden="{{activeTab !== 'history'}}" class="card ui-soft-card section-card history-card">
+    <view class="history-top">
+      <view class="ui-section-title">历史记录</view>
+      <text class="history-count">{{historyRecords.length}} / {{maxHistory}}</text>
+    </view>
+    <view class="history-toolbar">
+      <button class="btn ui-btn-warning tiny-btn" bindtap="onClearHistoryTap">清空记录</button>
+    </view>
+    <view wx:if="{{!historyRecords.length}}" class="ui-empty">
+      <view class="ui-empty-title">暂无历史记录</view>
+      <view class="ui-empty-sub">可手动保存当前结果</view>
+    </view>
+    <view wx:else class="history-list">
+      <view class="history-item" wx:for="{{historyRecords}}" wx:key="id">
+        <view class="history-item-top">
+          <view class="history-tag {{item.action === 'encrypt' ? 'encrypt-tag' : 'decrypt-tag'}}">{{item.action === 'encrypt' ? '加密' : '解密'}}</view>
+          <text class="history-time">{{item.createdAtText}}</text>
+        </view>
+        <view class="history-payload" user-select>{{item.payload}}</view>
+        <view class="history-actions">
+          <button class="history-btn" data-id="{{item.id}}" bindtap="onApplyHistoryItem">回填解密</button>
+          <button class="history-btn danger" data-id="{{item.id}}" bindtap="onDeleteHistoryItem">删除</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{errorMsg}}" class="card ui-soft-card error-card">
+    <view class="error-text">{{errorMsg}}</view>
+  </view>
+</view>
