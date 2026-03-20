@@ -1,0 +1,79 @@
+.hero-meta {
+  margin-top: 10rpx;
+}
+
+.form-item {
+  margin-top: 20rpx;
+}
+
+.form-label {
+  font-size: 26rpx;
+  color: #334155;
+  margin-bottom: 10rpx;
+}
+
+.picker-value {
+  min-height: 84rpx;
+  border-radius: 14rpx;
+  padding: 0 24rpx;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+.content-input {
+  width: 100%;
+  min-height: 280rpx;
+  border-radius: 14rpx;
+  padding: 20rpx 24rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+
+.contact-input {
+  width: 100%;
+  min-height: 84rpx;
+  border-radius: 14rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+
+.reply-row {
+  padding: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.reply-title {
+  font-size: 26rpx;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.reply-desc {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: #64748b;
+}
+
+.input-tip {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: #94a3b8;
+  text-align: right;
+}
+
+.scene-tip {
+  margin-top: 20rpx;
+  padding: 16rpx 18rpx;
+  font-size: 24rpx;
+  color: #475569;
+}
+
+.submit-btn {
+  margin-top: 24rpx;
+}

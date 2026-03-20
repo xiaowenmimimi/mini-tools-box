@@ -25,4 +25,5 @@
     </view>
   </view>
   <view class="hint">选择一个工具箱开始处理</view>
+  <button class="btn ui-btn-primary feedback-fab" bindtap="goFeedback">意见反馈</button>
 </view>

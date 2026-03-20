@@ -1,0 +1,52 @@
+<view class="page-shell">
+  <view class="page-header ui-hero-glass">
+    <view class="page-title">意见反馈</view>
+    <view class="page-subtitle">提交你遇到的问题或建议，帮助持续优化</view>
+  </view>
+
+  <view class="card ui-soft-card">
+    <view class="ui-section-title">反馈表单</view>
+
+    <view class="form-item">
+      <view class="form-label">反馈类型</view>
+      <picker mode="selector" range="{{typeOptions}}" range-key="label" value="{{typeIndex}}" bindchange="onTypeChange">
+        <view class="picker-value ui-input-surface">{{typeOptions[typeIndex].label}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">问题描述</view>
+      <textarea
+        class="content-input ui-input-surface"
+        placeholder="请尽量描述清楚问题现象、操作步骤和预期结果"
+        maxlength="500"
+        value="{{content}}"
+        bindinput="onContentInput"
+      ></textarea>
+      <view class="input-tip">{{contentCount}}/500</view>
+    </view>
+
+    <view class="form-item reply-row ui-muted-card">
+      <view>
+        <view class="reply-title">希望收到回复通知</view>
+        <view class="reply-desc">开启后需要填写邮箱，用于接收信息</view>
+      </view>
+      <switch color="#0d9488" checked="{{wantsReply}}" bindchange="onWantsReplyChange" />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">邮箱{{wantsReply ? '（必填）' : '（选填）'}}</view>
+      <input
+        class="contact-input ui-input-surface"
+        placeholder="{{wantsReply ? '请输入可接收回复的邮箱' : '请输入邮箱（选填）'}}"
+        maxlength="100"
+        value="{{email}}"
+        bindinput="onEmailInput"
+      />
+    </view>
+
+    <view wx:if="{{scenePath}}" class="scene-tip ui-muted-card">来源页面：{{scenePath}}</view>
+    <button class="btn ui-btn-primary submit-btn" loading="{{submitting}}" disabled="{{submitting}}" bindtap="submitForm">提交反馈</button>
+  </view>
+
+</view>

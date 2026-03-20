@@ -22,6 +22,7 @@ App({
   },
   globalData: {
     version: '0.1.0',
+    feedbackApiBaseUrl: 'https://comment.xhwen.cn',
     // 主题色配置
     theme: {
       primary: '#10B981',

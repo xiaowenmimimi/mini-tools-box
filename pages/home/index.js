@@ -13,6 +13,9 @@ Page({
     const tool = this.data.tools[index];
     wx.navigateTo({url: tool.path});
   },
+  goFeedback() {
+    wx.navigateTo({ url: '/pages/feedback/index' });
+  },
   onShareAppMessage() {
     return {
       title: 'Mini Tools Box 实用工具箱',

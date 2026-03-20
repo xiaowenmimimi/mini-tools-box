@@ -92,3 +92,19 @@
   text-align: center;
   line-height: 1.4;
 }
+
+.feedback-fab {
+  position: fixed;
+  right: 28rpx;
+  bottom: 28rpx;
+  bottom: calc(28rpx + env(safe-area-inset-bottom));
+  z-index: 20;
+  min-width: 190rpx;
+  height: 82rpx;
+  border-radius: 999rpx;
+  padding: 0 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 14rpx 32rpx rgba(13, 148, 136, 0.28);
+}
