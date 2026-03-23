@@ -18,7 +18,7 @@ function request(options = {}) {
 
   const finalUrl = joinUrl(baseUrl, url)
   if (!finalUrl || !/^https?:\/\//.test(finalUrl)) {
-    return Promise.reject(new Error('反馈服务地址未配置'))
+    return Promise.reject(new Error(`反馈服务地址无效: ${finalUrl || 'EMPTY_URL'}`))
   }
 
   return new Promise((resolve, reject) => {

@@ -91,7 +91,12 @@ Page({
       this.clearDraft()
       wx.showToast({ title: '提交成功', icon: 'success' })
     } catch (err) {
-      wx.showToast({ title: err.message || '提交失败，请稍后再试', icon: 'none' })
+      const message = (err && err.message) || '提交失败，请稍后再试'
+      wx.showModal({
+        title: '提交失败',
+        content: message,
+        showCancel: false
+      })
     } finally {
       this.setData({ submitting: false })
     }

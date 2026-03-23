@@ -3,7 +3,7 @@ const { request } = require('../utils/request')
 function getFeedbackBaseUrl() {
   const app = getApp && getApp()
   const baseUrl = app && app.globalData && app.globalData.feedbackApiBaseUrl
-  return (baseUrl || '').trim()
+  return String(baseUrl || '').trim().replace(/^[`'"]+|[`'"]+$/g, '')
 }
 
 function normalizeContact(contact) {
