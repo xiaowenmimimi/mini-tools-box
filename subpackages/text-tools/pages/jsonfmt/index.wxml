@@ -1,6 +1,6 @@
 <view class="page-shell">
   <view class="page-header ui-hero-glass">
-    <view class="page-title">JSON格式化</view>
+    <view class="page-title">JSON</view>
     <view class="page-subtitle">格式化、压缩与校验 JSON</view>
   </view>
 
